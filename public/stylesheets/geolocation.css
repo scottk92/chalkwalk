@@ -1,0 +1,23 @@
+html, body {
+	height: 100%;
+}
+
+#paintbrush {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  margin: 5px;
+  z-index: 1;
+  padding: 5px;
+}
+#coords {
+    height: 10%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#location {
+    height: 90%;
+    margin: 0px;
+    padding: 0px
+}

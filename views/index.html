@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chalk Walk - Gameroom</title>
+
+    <!-- Bootstrap -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      #search-results-table {
+        margin-top: 2%;
+      }
+      #no-results-msg, #search-results-table, #search-game-panel, #create-game-panel {
+        display: none;
+      }
+      #go-to-create, #go-to-search {
+        margin-top: 3%;
+        width: 100%;
+      }
+      .username-display, .go-to-name {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Username Panel -->
+    <div id="name-panel">
+      <h2>What is your name?</h2>
+      <form role="form">
+        <div class="form-group">
+          <label class="sr-only" for="nameInput">Name</label>
+          <input id="nameInput" type="text" class="form-control" placeholder="Scott">
+        </div>
+        <button id="name-submit-btn" type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+      </form>
+    </div>
+
+    <!-- Search for Game Panel -->
+    <div id="search-game-panel">
+      <h5 class="username-display"></h5>
+      <button type="button" class="btn btn-link go-to-name">Change username</button>
+      <h2>Search for a Game</h2>
+      <form role="form">
+        <div class="form-group">
+          <p id="no-results-msg" class="bg-danger"></p>
+          <label class="sr-only" for="gameNameQueryInput">Game Name</label>
+          <input id="gameNameQueryInput" type="text" class="form-control" placeholder="Enter Game name">
+        </div>
+        <button id="game-search-btn" type="button" class="btn btn-primary btn-lg btn-block">Search</button>
+        <button id="go-to-create" type="button" class="btn btn-link">or Create a Game</button>
+      </form>
+      <table id="search-results-table" class="table table-striped">
+        <tbody id="search-results-tbody">
+          <tr>
+            <th>Game Name</th>
+            <th>Join?</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Create Game Panel -->
+    <div id="create-game-panel">
+      <h5 class="username-display"></h5>
+      <button type="button" class="btn btn-link go-to-name">Change username</button>
+      <h2>Create a Game</h2>
+      <form role="form">
+        <div class="form-group">
+          <p id="failed-to-create-msg" class="bg-danger"></p>
+          <label class="sr-only" for="createGameNameInput">Game Name</label>
+          <input id="createGameNameInput" type="text" class="form-control" placeholder="Enter Game name">
+        </div>
+        <button id="game-create-btn" type="button" class="btn btn-primary btn-lg btn-block">Create</button>
+        <button id="go-to-search" type="button" class="btn btn-link">or Search for a Game</button>
+      </form>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/panel-transition.js"></script>
+    <script src="javascripts/find-games.js"></script>
+    <script src="javascripts/create-games.js"></script>
+    <script>
+     localStorage.clear();
+      document.addEventListener('DOMContentLoaded', function(){
+        var NAME_PANEL = 0;
+        var SEARCH_PANEL = 1;
+        var CREATE_PANEL = 2;
+
+        // Control the username panel
+        document.getElementById("name-submit-btn").addEventListener("click", function(){
+          var username = document.getElementById("nameInput").value;
+          if (username == "") alert("Username can't be blank");
+          else {
+            document.getElementsByClassName("username-display");
+            var usernameDisplays = document.getElementsByClassName("username-display");
+            Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
+              usernameDisplay.innerHTML = username;
+            });
+            localStorage.username = username;
+            showPanel(SEARCH_PANEL);
+            //namePanel.style.display = 'none';
+            //searchPanel.style.display = 'block';
+          }
+        });
+
+        // Control the game search panel
+        var gameFinder = new GameFinder("search-results-table", "search-results-tbody", "gameNameQueryInput", "no-results-msg");
+        document.getElementById("game-search-btn").addEventListener("click", function(){
+          gameFinder.search();
+        });
+
+        // Control the game create panel
+        var gameCreator = new GameCreator("createGameNameInput", "failed-to-create-msg");
+        document.getElementById("game-create-btn").addEventListener("click", function(){
+          gameCreator.create();
+        });
+
+        // Control transitions
+        var backButtons = document.getElementsByClassName("go-to-name");
+        Array.prototype.filter.call(backButtons, function(backButton){
+          backButton.addEventListener("click", function(){
+            showPanel(NAME_PANEL);
+          });
+        });
+        document.getElementById("go-to-create").addEventListener("click", function(){
+          showPanel(CREATE_PANEL);
+        });
+        document.getElementById("go-to-search").addEventListener("click", function(){
+          showPanel(SEARCH_PANEL);
+        });
+      });
+    </script>
+  </body>
+</html>

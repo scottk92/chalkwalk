@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chalk Walk - Prep Room</title>
+    <style>
+      #original-image {
+        margin-right: auto;
+        margin-left: auto;
+        display: none
+      }
+      #image-name {
+        text-align: center;
+      }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1 id="timer" class="text-center">0:00</h1>
+    <button id="ready-btn" type="button" class="btn btn-primary btn-lg btn-block">Ready?</button>
+    <img id="original-image" src="" class="img-responsive" alt="Responsive image">
+    <h1 id="image-name"></h1>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/counter.js"></script>
+    <script src="javascripts/random-image.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        var originalImage = document.getElementById("original-image");
+        var imageName = document.getElementById("image-name");
+        
+        /* Creates the timer.  Redirect to the map page when the timer expires. */
+        var timer = new Counter('timer', 10, function(){
+          originalImage.style.display = 'none';
+          imageName.style.display = 'none';
+          window.location = "/drawer";
+        });
+
+        /* Controls the Ready button.  Reveals and image and the answer and starts the 
+        timer. */
+        document.getElementById("ready-btn").addEventListener("click", function(e){
+          this.style.display = 'none';
+          originalImage.src = localStorage.imageFile;
+          imageName.innerHTML = localStorage.imageName;
+          originalImage.style.display = 'block';
+          imageName.style.display = 'block';
+          timer.countdown();
+        });
+      });
+    </script>
+  </body>
+</html>
