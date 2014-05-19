@@ -17,12 +17,23 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-      #drawer-guesser-options {
+      #drawer-guesser-options, #color-options {
         text-align: center;
         margin-bottom: 5%;
       }
       #start-game-btn {
         display: none;
+      }
+      .color-box {
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin: 2%;
+        cursor: pointer;
+      }
+      #pick-a-color {
+        width: 100%;
+        text-align: left;
       }
     </style>
   </head>
@@ -38,6 +49,11 @@
         <input type="radio" name="optionsRadios" id="guesserRadio" class="roleRadioButton" value="Guesser"> Guesser
       </label>
     </div>
+
+    <div id="color-options">
+      <div id="pick-a-color">Pick a color:</div>
+    </div>
+
     <table class="table table-striped">
       <tbody id="role-tbody"></tbody>
     </table>
@@ -50,12 +66,15 @@
     <script src="javascripts/role-table.js"></script>
     <script src="javascripts/random-image.js"></script>
     <script src="javascripts/start-button.js"></script>
+    <script src="javascripts/color-box.js"></script>
     <script>
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com');
       var userRoleMap = {};
       var roleCounter = {'Drawer':0, 'Guesser':0};
       document.addEventListener('DOMContentLoaded', function(){
         document.getElementById("game-name-header").innerHTML = localStorage.game;
+        var colorBox = new ColorBox("color-options");
+        colorBox.createColorOptions();
 
         /* Guard against the user refreshing the page and adding themselves to the game twice.
            If this is the user's first time in the waiting room, add them to the firebase. */
@@ -71,6 +90,7 @@
           radioBtn.addEventListener("click", function(){
             localStorage.role = this.value;
             fb.child('Games').child(localStorage.game).child('roleChanges').push({'name':localStorage.username, 'role':this.value});
+            colorBox.showOptions(this.value == 'Drawer');
           });
         });
 

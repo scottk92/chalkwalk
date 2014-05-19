@@ -31,7 +31,7 @@ function setLocation(position) {
     if (calibrate % NUM_POINTS == 0) {
       var calibratedPos = calibratedLoc();
       calibrateCoords.push(calibratedPos);
-      coordsDB.push({'name':localStorage.username, 'lat':calibratedPos.lat(), 'lng':calibratedPos.lng()});
+      coordsDB.push({'name':localStorage.username, 'lat':calibratedPos.lat(), 'lng':calibratedPos.lng(), 'color':localStorage.color});
     }
   //}
   lastLocation = pos;

@@ -8,7 +8,7 @@ function initializeCanvasMap(fb, mapId) {
       {
         stylers: [
           { lightness: 100 },
-          { visibility: "off" }
+          { visibility: "simplified" }
         ]
       }
     ];
@@ -28,6 +28,7 @@ function recordCoordinates(fb) {
   fb.child('coords').on('child_added', function(snapshot) {
     var data = snapshot.val();
     var user = data.name;
+    var color = data.color;
     var newCoords = new google.maps.LatLng(data.lat, data.lng);
     if (lastRecordedCoords[user] == undefined) {
       lastRecordedCoords[user] = newCoords;
@@ -35,17 +36,18 @@ function recordCoordinates(fb) {
       console.log("line drawn!");
       var oldCoords = lastRecordedCoords[user];
       lastRecordedCoords[user] = newCoords;
-      drawLine(oldCoords, newCoords);
+      drawLine(oldCoords, newCoords, color);
     }
   });
 }
 
 // Draws a red line on the map between p1 and p2
-function drawLine(pos1, pos2) {
+function drawLine(pos1, pos2, color) {
+  if (color == undefined) color = "#000000";
   var line = new google.maps.Polyline({
     path: [pos1, pos2],
     geodesic: true,
-    strokeColor: '#FF0000',
+    strokeColor: color,
     strokeOpacity: 1.0,
     strokeWeight: 2,
     map: canvasMap
