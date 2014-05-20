@@ -35,6 +35,11 @@
         width: 100%;
         text-align: left;
       }
+      #level-input-container {
+        display: none;
+        margin-top:2%;
+        margin-bottom: 2%;
+      }
     </style>
   </head>
   <body>
@@ -48,6 +53,15 @@
       <label class="radio-inline">
         <input type="radio" name="optionsRadios" id="guesserRadio" class="roleRadioButton" value="Guesser"> Guesser
       </label>
+    </div>
+
+    <div id='level-input-container'>
+      <p>Select a level:</p>
+      <select id='level-input' class="form-control">
+        <option value='easy' selected="selected">Easy</option>
+        <option value='medium'>Medium</option>
+        <option value='hard'>Hard</option>
+      </select>
     </div>
 
     <div id="color-options">
@@ -117,7 +131,7 @@
 
         /* Controls the Start button and listens for when the master presses the start button.
            Stores the random image that the master randomly selected in localStorage. */
-        var startButton = new StartButton("start-game-btn", roleCounter, userRoleMap);
+        var startButton = new StartButton("start-game-btn", roleCounter, userRoleMap, "level-input", "level-input-container");
         startButton.initialize(localStorage.username, localStorage.game);
         fb.child('Games').child(localStorage.game).child('start').on('child_added', function(snapshot) {
           localStorage.numDrawers = roleCounter['Drawer'];

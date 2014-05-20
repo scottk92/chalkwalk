@@ -3,10 +3,12 @@
  * A class to control the start button on the waiting room page.  The master of the
  * game selects this to transition from the waiting room to gameplay. 
  */
-function StartButton(buttonId, roleCounter, userRoleMap) {
+function StartButton(buttonId, roleCounter, userRoleMap, levelInputId, levelInputContainerId) {
 	this.button = document.getElementById(buttonId);
 	this.roleCounter = roleCounter;
 	this.userRoleMap = userRoleMap;
+	this.levelInput = document.getElementById(levelInputId);
+	this.levelInputContainer = document.getElementById(levelInputContainerId);
 }
 /*
  * revealButton()
@@ -23,9 +25,12 @@ StartButton.prototype.implementButton = function (gameName) {
 		}
 		startButton.closeGame(gameName);
 		var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + gameName);
-		var randomImage = getRandomImage();
+		var randomImage = getRandomImage(startButton.levelInput.value);
 		fb.child('start').push(randomImage);
 	});
+
+	// Display the level input
+	this.levelInputContainer.style.display = 'block';
 }
 
 /*

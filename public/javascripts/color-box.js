@@ -31,15 +31,13 @@ ColorBox.prototype.showOptions = function (show) {
 	else this.container.style.display = 'none';
 }
 
-
 function turnOnRandomColor() {
-	var i = Math.floor(Math.random()*imageLibrary.length);
+	var i = Math.floor(Math.random()*colorLibrary.length);
 	var colorBoxes = document.getElementsByClassName("color-box");
 	colorBoxes[i].click();
 }
 
 ColorBox.prototype.createColorOptions = function () {
-	var randomIndex = Math.floor(Math.random()*colorLibrary.length);
 	for (var i=0; i<colorLibrary.length; i++) {
 		var colorBox = document.createElement("div");
 		colorBox.id = colorLibrary[i];
