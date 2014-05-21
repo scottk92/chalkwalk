@@ -72,11 +72,15 @@ var watch;
 var isDrawing = false;
 function toggleDraw() {
   if (isDrawing) {
-    document.getElementById("paintbrush").style.opacity = "1";
+    document.getElementById("paintbrush-img").style.opacity = 1.0;
+    document.getElementById("paintbrush").className = "btn btn-success btn-lg btn-block";
+    document.getElementById("paintbrush").innerHTML = "Start Painting";
     isDrawing = false;
     navigator.geolocation.clearWatch(watch);
   } else {
-    document.getElementById("paintbrush").style.opacity = "0.5";
+    document.getElementById("paintbrush-img").style.opacity = 0.5;
+    document.getElementById("paintbrush").className = "btn btn-danger btn-lg btn-block";
+    document.getElementById("paintbrush").innerHTML = "Pause Painting";
     isDrawing = true;
     calibrate = 0;
     watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);

@@ -21,8 +21,8 @@
     <![endif]-->
     <style>
       #timer {
-        position: absolute;
-        z-index: 101;
+        /*position: absolute;
+        z-index: 101;*/
         width: 100%;
         text-align: center;
       }
@@ -41,12 +41,18 @@
         height: 100%; 
         display: none;
       }
+      #paintbrush-container {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
     <h1 id="waiting-msg">Waiting for everyone to enter the room...</h1>
     <h1 id="timer" class="text-center">0:00</h1>
-    <img id="paintbrush" src="images/paintbrush.jpg" alt="paintbrush" />
+    <div id="paintbrush-container">
+      <img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
+    </div>
+    <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button>
     <div id="canvas-map"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

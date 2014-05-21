@@ -1,5 +1,5 @@
 var canvasMap;
-var lastRecordedCoords = {};
+var userCoords = {};
 
 // Load the map and set up event listener for drawing on the map
 function initializeCanvasMap(fb, mapId) {
@@ -23,6 +23,12 @@ function initializeCanvasMap(fb, mapId) {
   });
 }
 
+// Return the last recorded coordinates of a user
+function lastRecordedCoordinates(user) {
+  var coords = userCoords[user];
+  return coords[coords.length-1];
+}
+
 // Everytime coordinates are added, draw a line.
 function recordCoordinates(fb) {
   fb.child('coords').on('child_added', function(snapshot) {
@@ -30,12 +36,12 @@ function recordCoordinates(fb) {
     var user = data.name;
     var color = data.color;
     var newCoords = new google.maps.LatLng(data.lat, data.lng);
-    if (lastRecordedCoords[user] == undefined) {
-      lastRecordedCoords[user] = newCoords;
+    if (userCoords[user] == undefined) {
+      userCoords[user] = [newCoords];
     } else {
       console.log("line drawn!");
-      var oldCoords = lastRecordedCoords[user];
-      lastRecordedCoords[user] = newCoords;
+      var oldCoords = lastRecordedCoordinates(user);
+      userCoords[user].push(newCoords);
       drawLine(oldCoords, newCoords, color);
     }
   });
