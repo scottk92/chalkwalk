@@ -31,7 +31,7 @@ function setLocation(position) {
     if (calibrate % NUM_POINTS == 0) {
       var calibratedPos = calibratedLoc();
       calibrateCoords.push(calibratedPos);
-      coordsDB.push({'name':localStorage.username, 'lat':calibratedPos.lat(), 'lng':calibratedPos.lng(), 'color':localStorage.color});
+      coordsDB.push({'name':localStorage.username, 'stopped':false, 'lat':calibratedPos.lat(), 'lng':calibratedPos.lng(), 'color':localStorage.color});
     }
   //}
   lastLocation = pos;
@@ -72,6 +72,7 @@ var watch;
 var isDrawing = false;
 function toggleDraw() {
   if (isDrawing) {
+    coordsDB.push({'name':localStorage.username, 'stopped':true});
     document.getElementById("paintbrush-img").style.opacity = 1.0;
     document.getElementById("paintbrush").className = "btn btn-success btn-lg btn-block";
     document.getElementById("paintbrush").innerHTML = "Start Painting";

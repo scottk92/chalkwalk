@@ -37,6 +37,13 @@ Counter.prototype.countdown = function() {
   }, 1000);
 }
 
+// Stop the countdown
+Counter.prototype.stop = function() {
+  this.numSeconds = 0;
+  this.clock.innerHTML = "0:00";
+  this.endFn();
+}
+
 // Pauses the countdown
 Counter.prototype.pause = function() {
   clearInterval(this.intervalID);

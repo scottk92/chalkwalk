@@ -29,20 +29,41 @@
       #canvas-map { 
         height: 100%; 
       }
-      #waiting-msg, #timer {
+      #waiting-msg, #countdown-container {
         position: absolute;
         width: 100%;
         z-index: 101;
         text-align: center;
       }
-      #timer {
+      #countdown-container {
         display: none;
+      }
+      #modal-buttons-container button {
+        margin:2%;
       }
     </style>
   </head>
   <body>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            Are you sure you want to end the game?<br>
+            <div id="modal-buttons-container" class="text-center">
+              <button id="continue-game-btn" type="button" class="btn btn-default btn-lg" data-dismiss="modal">No, continue playing</button>
+              <!--button id="end-game-btn" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Yes, show me my results.</button-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h1 id="waiting-msg">Waiting for everyone to enter the room...</h1>
-    <h1 id="timer">0:00</h1>
+    <div id="countdown-container">
+      <h1 id="timer">0:00</h1>
+      <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
+    </div>
     <div id="canvas-map"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -55,10 +76,20 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 180, function(){
-          alert("Drawing time is over! Transition to results page");
+        var timer = new Counter('timer', 1800, function(){
+          alert("Time's up!");
           stopDrawing(fb);
         });
+        document.getElementById("show-modal-btn").addEventListener("click", function(){
+          timer.pause();
+        });
+        document.getElementById("continue-game-btn").addEventListener("click", function(){
+          timer.countdown()
+        });
+        /*document.getElementById("end-game-btn").addEventListener("click", function(){
+          timer.stop()
+        });*/
+
 
         // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
         fb.child('drawers').on('child_added', function(snapshot) {
@@ -66,7 +97,7 @@
           if (numDrawersReady == localStorage.numDrawers) {
             alert("Start guessing!!!");
             document.getElementById('waiting-msg').style.display = 'none';
-            document.getElementById('timer').style.display = 'block';
+            document.getElementById('countdown-container').style.display = 'block';
             timer.countdown();
           }
         });

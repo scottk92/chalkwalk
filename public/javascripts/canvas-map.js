@@ -34,15 +34,25 @@ function recordCoordinates(fb) {
   fb.child('coords').on('child_added', function(snapshot) {
     var data = snapshot.val();
     var user = data.name;
-    var color = data.color;
-    var newCoords = new google.maps.LatLng(data.lat, data.lng);
-    if (userCoords[user] == undefined) {
-      userCoords[user] = [newCoords];
+    if (!data.stopped) {
+      var newCoords = new google.maps.LatLng(data.lat, data.lng);
+      if (userCoords[user] == undefined) {
+        // First coordinate that the user pushed
+        userCoords[user] = [];
+        userCoords[user].push([newCoords]);
+      } else {
+        var activeLine = userCoords[user][userCoords[user].length-1];
+        if (activeLine.length > 1) {
+          // Line drawn
+          drawLine(activeLine[activeLine.length-1], newCoords, data.color);
+          console.log("Line drawn!");
+        }
+        // Add to the current line
+        activeLine.push(newCoords);
+      }
     } else {
-      console.log("line drawn!");
-      var oldCoords = lastRecordedCoordinates(user);
-      userCoords[user].push(newCoords);
-      drawLine(oldCoords, newCoords, color);
+      // User pressed the stop button, so create a new empty array
+      userCoords[user].push([]);
     }
   });
 }
