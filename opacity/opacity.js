@@ -1,6 +1,7 @@
 var changeOpacity = function(rangeid, elementid) {
-    var selector    = '[' + rangeid + ']',
+    var selector    = '#' + rangeid,
         $input      = $(selector);
+	
 	var image      	= document.getElementById(elementid);
 
     $input.rangeslider({
