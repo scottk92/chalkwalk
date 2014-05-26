@@ -1,15 +1,11 @@
- $(function() {
-
-    var selector    = '[opacrange]',
+var changeOpacity = function(rangeid, elementid) {
+    var selector    = '[' + rangeid + ']',
         $input      = $(selector);
-	var image      	= document.getElementById("image");
+	var image      	= document.getElementById(elementid);
 
     $input.rangeslider({
 		// Deactivate the feature detection
         polyfill: false,
-
-		// Callback function
-        onInit: function() {},
 
         // Callback function
         onSlide: function(position, value) {
@@ -22,4 +18,4 @@
 		}
     });
 	
-});
+}
