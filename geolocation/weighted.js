@@ -24,7 +24,8 @@ google.maps.event.addDomListener(window, 'load', function initialize() {
     calibrateCoords.push(new google.maps.LatLng(37.424961, -122.169810));
     calibrateCoords.push(new google.maps.LatLng(37.425238, -122.170024));
     calibrateCoords.push(new google.maps.LatLng(37.425025, -122.170115));
-    drawPoints(recalibrate(globeToPoint(calibrateCoords)));
+    var drawing = createDrawing();
+    drawPoints('red', drawing, calibrateCoords);
   }
 });
 

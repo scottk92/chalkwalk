@@ -1,7 +1,11 @@
-var largestDimension = Math.min(screen.availWidth, screen.availHeight);
-// Draw points
-function drawPoints(points) {
+
+
+var largestDimension;
+
+// Creates drawing and associated containers, and adds to body
+function createDrawing() {
   var drawing = document.createElement('canvas');
+  largestDimension  = Math.min(screen.availWidth, screen.availHeight);
   drawing.width = largestDimension;
   drawing.height = largestDimension;
   var outer, inner;
@@ -18,13 +22,24 @@ function drawPoints(points) {
   document.body.appendChild(outer);
   var drawingImage = new Transform('outer', 'inner');
   drawingImage.startListening();
+  return drawing;
+}
+
+/* 
+   color: color to draw path
+   drawing: object representing drawing (from createDrawing)
+   points: array of points to draw (in lat-lng)
+*/
+function drawPoints(color, drawing, points) {
   var context = drawing.getContext('2d');console.log(drawing.width + " " + drawing.height);
-  context.fillStyle = "#00FF00";context.fillRect(0,0,drawing.width, drawing.height);for (var i = 0; i < points.length - 1; i++) {
+  //context.fillStyle = "#00FF00";context.fillRect(0,0,drawing.width, drawing.height);
+  var projectedPoints = recalibrate(globeToPoint(points));
+  for (var i = 0; i < projectedPoints.length - 1; i++) {
     //console.log('drawing ' + points[i].x + " " + points[i].y);
-    context.moveTo(points[i].x, points[i].y);
-    context.lineTo(points[i+1].x, points[i+1].y);
+    context.moveTo(projectedPoints[i].x, projectedPoints[i].y);
+    context.lineTo(projectedPoints[i+1].x, projectedPoints[i+1].y);
   }
-  context.strokeStyle = 'red';
+  context.strokeStyle = color;
   context.stroke();
 }
 
