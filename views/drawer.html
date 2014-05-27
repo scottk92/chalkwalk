@@ -65,13 +65,16 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 180, function(){
+        var timer = new Counter('timer', 5, function(){
           stopDrawing(fb);
           document.getElementById('timer').innerHTML = "Your result!";
           document.getElementById('paintbrush').style.display = 'none';
-          document.getElementById("canvas-map").style.display = 'block';
+          
+          drawPoints(userCoords, colorCoords);
+          //document.getElementById("canvas-map").style.display = 'block';
         });
 
+        
         // Enter the drawing room and send Firebase an event
         fb.child('drawers').push({'name':localStorage.username});
 
@@ -87,6 +90,10 @@
           }
         });
 
+        fb.child('coords').on('child_added', function(snapshot) {
+          var coord = snapshot.val();
+          coords.push(coord); 
+        });
         // Initialize geolocation tracking code that sends coordinates to Firebase
         initializeDrawing();
 

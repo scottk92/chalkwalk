@@ -1,5 +1,6 @@
 var canvasMap;
 var userCoords = {};
+var colorCoords = {};
 
 // Load the map and set up event listener for drawing on the map
 function initializeCanvasMap(fb, mapId) {
@@ -35,6 +36,9 @@ function recordCoordinates(fb) {
     var data = snapshot.val();
     var user = data.name;
     var color = data.color;
+    if (!(user in colorCoords)) {
+      colorCoords[user] = color;
+    }
     var newCoords = new google.maps.LatLng(data.lat, data.lng);
     if (userCoords[user] == undefined) {
       userCoords[user] = [newCoords];

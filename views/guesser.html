@@ -55,7 +55,7 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 180, function(){
+        var timer = new Counter('timer', 5, function(){
           alert("Drawing time is over! Transition to results page");
           stopDrawing(fb);
         });
