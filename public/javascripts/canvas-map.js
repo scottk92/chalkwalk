@@ -24,12 +24,6 @@ function initializeCanvasMap(fb, mapId) {
   });
 }
 
-// Return the last recorded coordinates of a user
-function lastRecordedCoordinates(user) {
-  var coords = userCoords[user];
-  return coords[coords.length-1];
-}
-
 // Everytime coordinates are added, draw a line.
 function recordCoordinates(fb) {
   fb.child('coords').on('child_added', function(snapshot) {
@@ -71,6 +65,7 @@ function drawLine(pos1, pos2, color) {
   });
 }
 
+// Stop tracking
 function stopDrawing(fb) {
   fb.child('coords').off('child_added');
 }

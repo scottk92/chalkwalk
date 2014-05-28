@@ -11,10 +11,6 @@
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <link href="stylesheets/geolocation.css" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-    <script src="javascripts/drawer.js"></script>
-    <script src="javascripts/canvas-map.js"></script>
-    <script src="javascripts/screenshot.js"></script>
-    <script src="javascripts/create_results.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -68,19 +64,24 @@
     <h1 id="waiting-msg">Waiting for everyone to enter the room...</h1>
     <div id="countdown-container">
       <h1 id="timer" class="text-center">0:00</h1>
-      <!--button id="end-game-btn" type="button" class="btn btn-danger">End Game</button-->
+      <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
     </div>
     <div id="paintbrush-container">
       <img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
+      <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button>
     </div>
-    <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button>
     <div id="canvas-map"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/drawer.js"></script>
+    <script src="javascripts/canvas-map.js"></script>
+    <script src="javascripts/screenshot.js"></script>
+    <script src="javascripts/create_results.js"></script>
     <script src="javascripts/counter.js"></script>
+    <script src="javascripts/endgame.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
@@ -88,23 +89,15 @@
         var numDrawersReady = 0;
         var timer = new Counter('timer', 1800, function(){
           stopDrawing(fb);
-          /*document.getElementById('timer').innerHTML = "Your result!";
-          document.getElementById('paintbrush').style.display = 'none';
-          */
-          var image = drawImage(userCoords, colorCoords);
-          fb.child('drawnImage').push({'image':image});//document.getElementById("canvas-map").style.display = 'block';
-          window.location = "results.html";
+          document.getElementById('show-modal-btn').style.display = 'none';
+          document.getElementById('timer').innerHTML = "Your result!";
+          document.getElementById('paintbrush-container').style.display = 'none';
+          document.getElementById("canvas-map").style.display = 'block';
+          /*var image = drawImage(userCoords, colorCoords);
+          fb.child('drawnImage').push({'image':image});
+          window.location = "results.html";*/
         });
-       /* document.getElementById("show-modal-btn").addEventListener("click", function(){
-          timer.pause();
-        });
-        document.getElementById("continue-game-btn").addEventListener("click", function(){
-          timer.countdown()
-        });*/
-        /*document.getElementById("end-game-btn").addEventListener("click", function(){
-          timer.stop()
-        });*/
-
+        initializeEndGame(timer);
         
         // Enter the drawing room and send Firebase an event
         fb.child('drawers').push({'name':localStorage.username});
@@ -121,10 +114,6 @@
           }
         });
 
-        fb.child('coords').on('child_added', function(snapshot) {
-          var coord = snapshot.val();
-          coords.push(coord); 
-        });
         // Initialize geolocation tracking code that sends coordinates to Firebase
         initializeDrawing();
 

@@ -37,6 +37,11 @@ Counter.prototype.countdown = function() {
   }, 1000);
 }
 
+// Check if the countdown has stopped 
+Counter.prototype.isStopped = function() {
+  return this.numSeconds <= 0;
+}
+
 // Stop the countdown
 Counter.prototype.stop = function() {
   this.numSeconds = 0;
