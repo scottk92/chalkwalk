@@ -45,7 +45,7 @@ function recordCoordinates(fb) {
         // Add to the current line
         activeLine.push(newCoords);
       }
-    } else {
+    } else if (userCoords[user] != undefined) {
       // User pressed the stop button, so create a new empty array
       userCoords[user].push([]);
     }

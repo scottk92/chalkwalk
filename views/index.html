@@ -92,12 +92,15 @@
     <script src="javascripts/find-games.js"></script>
     <script src="javascripts/create-games.js"></script>
     <script>
-     localStorage.clear();
-      document.addEventListener('DOMContentLoaded', function(){
-        var NAME_PANEL = 0;
-        var SEARCH_PANEL = 1;
-        var CREATE_PANEL = 2;
+      // Refresh everything
+      localStorage.clear();
+      
+      // Panel constants
+      var NAME_PANEL = 0;
+      var SEARCH_PANEL = 1;
+      var CREATE_PANEL = 2;
 
+      document.addEventListener('DOMContentLoaded', function(){
         // Control the username panel
         document.getElementById("name-submit-btn").addEventListener("click", function(){
           var username = document.getElementById("nameInput").value;
@@ -110,8 +113,6 @@
             });
             localStorage.username = username;
             showPanel(SEARCH_PANEL);
-            //namePanel.style.display = 'none';
-            //searchPanel.style.display = 'block';
           }
         });
 

@@ -16,10 +16,10 @@ Guessers : sees everybody's progress
 
 localStorage
 ------------
-- active: Whether the room is available to join or not
-- numDrawers: The number of drawers in the game.  This is to detect when the game is ready to start.
 - game: Name of the game that the user is currently playing.
 - imageFile: The file name of the random image assigned to the game.
 - imageName: The name of the random image assigned to the game.
-- username: Name of the user,
+- numDrawers: The number of drawers in the game.  This is to detect when the game is ready to start.
+- round: The round # of the game. Only the master of the game has access to this variable.
+- username: Name of the user.
 - waiting: Boolean flag to see if the user has already entered the waiting room.  This is to prevent the bug where the user refreshes in the waiting room and simualtes another user entering the waiting room.

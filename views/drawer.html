@@ -36,6 +36,9 @@
         text-align: center;
         display: none;
       }
+      #restart-game-btn {
+        display: none;
+      }
       #paintbrush-container {
         margin-top:5%;
       }
@@ -65,6 +68,7 @@
     <div id="countdown-container">
       <h1 id="timer" class="text-center">0:00</h1>
       <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
+      <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
     </div>
     <div id="paintbrush-container">
       <img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
@@ -85,12 +89,13 @@
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
-        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game);
+        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         var timer = new Counter('timer', 1800, function(){
           stopDrawing(fb);
-          document.getElementById('show-modal-btn').style.display = 'none';
           document.getElementById('timer').innerHTML = "Your result!";
+          document.getElementById('show-modal-btn').style.display = 'none';
+          document.getElementById('restart-game-btn').style.display = 'block';
           document.getElementById('paintbrush-container').style.display = 'none';
           document.getElementById("canvas-map").style.display = 'block';
           /*var image = drawImage(userCoords, colorCoords);

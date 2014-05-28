@@ -20,7 +20,7 @@ var positionOptions = {
 };
 var rawCoords = [];
 var calibrateCoords = [];
-var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/coords');
+var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
 
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
@@ -31,7 +31,7 @@ function setLocation(position) {
     if (calibrate % NUM_POINTS == 0) {
       var calibratedPos = calibratedLoc();
       calibrateCoords.push(calibratedPos);
-      coordsDB.push({'name':localStorage.username, 'stopped':false, 'lat':calibratedPos.lat(), 'lng':calibratedPos.lng(), 'color':localStorage.color});
+      coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
     }
   //}
   lastLocation = pos;

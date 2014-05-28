@@ -34,7 +34,7 @@
         z-index: 101;
         text-align: center;
       }
-      #countdown-container {
+      #countdown-container, #restart-game-btn {
         display: none;
       }
       #modal-buttons-container button {
@@ -62,6 +62,7 @@
     <div id="countdown-container">
       <h1 id="timer">0:00</h1>
       <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
+      <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
     </div>
     <div id="canvas-map"></div>
 
@@ -75,12 +76,13 @@
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
-        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game);
+        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         var timer = new Counter('timer', 1800, function(){
           stopDrawing(fb);
+          document.getElementById('timer').style.display = 'none';
           document.getElementById('show-modal-btn').style.display = 'none';
-          document.getElementById('timer').innerHTML = "Your result!";
+          document.getElementById('restart-game-btn').style.display = 'block';
         });
         initializeEndGame(timer);
 

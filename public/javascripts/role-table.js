@@ -3,9 +3,8 @@
  * A class to control the table displaying all the users and the roles
  * they select for themselves.
  */
-function RoleTable(tbodyId, gameName) {
+function RoleTable(tbodyId) {
 	this.tbody = document.getElementById(tbodyId);
-	this.gameName = gameName;
 	this.createHeaderRows();
 }
 

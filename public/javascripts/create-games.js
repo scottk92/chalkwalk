@@ -24,6 +24,7 @@ GameCreator.prototype.displayErrorMsg = function(msg) {
  */
 GameCreator.prototype.create = function() {
 	var gameName = this.input.value;
+	console.log(gameName);
 	var gamecreator = this;
 	if (gameName == "") {
 		this.displayErrorMsg("Game name can't be blank.");
@@ -64,6 +65,7 @@ GameCreator.prototype.addGametoDB = function(gameName, username) {
 	request.onload = function() {
 	  if (request.status >= 200 && request.status < 400){
 	    localStorage.game = gameName;
+	    localStorage.round = 1;
 	    window.location = '/waiting_room';
 	  } else {
 	    console.log("error");

@@ -82,18 +82,18 @@
     <script src="javascripts/start-button.js"></script>
     <script src="javascripts/color-box.js"></script>
     <script>
-      var fb = new Firebase('https://outdoorspictionary.firebaseIO.com');
+      var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var userRoleMap = {};
-      var roleCounter = {'Drawer':0, 'Guesser':0};
+      var roleCounter = {Drawer:0, Guesser:0};
       document.addEventListener('DOMContentLoaded', function(){
-        document.getElementById("game-name-header").innerHTML = localStorage.game;
+        document.getElementById("game-name-header").innerHTML = localStorage.game + " Round " + localStorage.round;
         var colorBox = new ColorBox("color-options");
         colorBox.createColorOptions();
 
         /* Guard against the user refreshing the page and adding themselves to the game twice.
            If this is the user's first time in the waiting room, add them to the firebase. */
         if (localStorage.waiting == undefined) {
-          fb.child('Games').child(localStorage.game).child('users').push({'name':localStorage.username});
+          fb.child('users').push({name:localStorage.username});
           localStorage.waiting = true;
           localStorage.role = 'Drawer';
         }
@@ -103,38 +103,38 @@
         Array.prototype.filter.call(radioBtns, function(radioBtn){
           radioBtn.addEventListener("click", function(){
             localStorage.role = this.value;
-            fb.child('Games').child(localStorage.game).child('roleChanges').push({'name':localStorage.username, 'role':this.value});
+            fb.child('roleChanges').push({name:localStorage.username, role:this.value});
             colorBox.showOptions(this.value == 'Drawer');
           });
         });
 
         // Listen to new users and add them to the table as they enter.
         var roleTable = new RoleTable("role-tbody", localStorage.game);
-        fb.child('Games').child(localStorage.game).child('users').on('child_added', function(snapshot) {
+        fb.child('users').on('child_added', function(snapshot) {
           var newUser = snapshot.val();
           roleTable.addUserToTable(newUser.name, userRoleMap);
-          roleCounter['Drawer'] += 1;
+          roleCounter.Drawer += 1;
         });
 
         // Listen to role changes.  userRoleMap maps username to DOM td element.
-        fb.child('Games').child(localStorage.game).child('roleChanges').on('child_added', function(snapshot) {
+        fb.child('roleChanges').on('child_added', function(snapshot) {
           var change = snapshot.val();
           userRoleMap[change.name].innerHTML = change.role;
           if (change.role == 'Drawer') {
-            roleCounter['Drawer'] += 1;
-            roleCounter['Guesser'] -= 1;
+            roleCounter.Drawer += 1;
+            roleCounter.Guesser -= 1;
           } else {
-            roleCounter['Drawer'] -= 1;
-            roleCounter['Guesser'] += 1;
+            roleCounter.Drawer -= 1;
+            roleCounter.Guesser += 1;
           }
         });
 
         /* Controls the Start button and listens for when the master presses the start button.
            Stores the random image that the master randomly selected in localStorage. */
         var startButton = new StartButton("start-game-btn", roleCounter, userRoleMap, "level-input", "level-input-container");
-        startButton.initialize(localStorage.username, localStorage.game);
-        fb.child('Games').child(localStorage.game).child('start').on('child_added', function(snapshot) {
-          localStorage.numDrawers = roleCounter['Drawer'];
+        startButton.initialize(localStorage.username);
+        fb.child('start').on('child_added', function(snapshot) {
+          localStorage.numDrawers = roleCounter.Drawer;
           localStorage.imageName = snapshot.val().answer;
           localStorage.imageFile = snapshot.val().file;
           if (localStorage.role == 'Drawer') {
