@@ -1,5 +1,6 @@
 var canvasMap;
 var userCoords = {};
+var colorCoords = {};
 
 // Load the map and set up event listener for drawing on the map
 function initializeCanvasMap(fb, mapId) {
