@@ -15,4 +15,5 @@ var createResultsPage = function(coordHash, colorHash) {
 			drawPoints(color, image, line);
 		}
 	}
+  return image;
 }
