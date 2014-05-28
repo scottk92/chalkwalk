@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-
+    
     <h1 id="waiting-msg">Waiting for everyone to enter the room...</h1>
     <div id="countdown-container">
       <h1 id="timer" class="text-center">0:00</h1>
@@ -84,18 +84,18 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 180, function(){
+        var timer = new Counter('timer', 1800, function(){
           stopDrawing(fb);
           document.getElementById('timer').innerHTML = "Your result!";
           document.getElementById('paintbrush').style.display = 'none';
           document.getElementById("canvas-map").style.display = 'block';
         });
-        document.getElementById("show-modal-btn").addEventListener("click", function(){
+       /* document.getElementById("show-modal-btn").addEventListener("click", function(){
           timer.pause();
         });
         document.getElementById("continue-game-btn").addEventListener("click", function(){
           timer.countdown()
-        });
+        });*/
         /*document.getElementById("end-game-btn").addEventListener("click", function(){
           timer.stop()
         });*/

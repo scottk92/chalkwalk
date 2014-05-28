@@ -42,7 +42,7 @@ function recordCoordinates(fb) {
         userCoords[user].push([newCoords]);
       } else {
         var activeLine = userCoords[user][userCoords[user].length-1];
-        if (activeLine.length > 1) {
+        if (activeLine.length >= 1) { // guard against strange cases
           // Line drawn
           drawLine(activeLine[activeLine.length-1], newCoords, data.color);
           console.log("Line drawn!");
