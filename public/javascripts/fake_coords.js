@@ -1,4 +1,4 @@
-var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/coords');
+var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
 coordsDB.push({'name':'A', 'lat':37.425627, 'lng':-122.167453, 'color':'#D1026C'});
 coordsDB.push({'name':'A', 'lat':37.426451, 'lng':-122.168286, 'color':'#D1026C'});
 coordsDB.push({'name':'A', 'lat':37.427192, 'lng':-122.169691, 'color':'#D1026C'});

@@ -78,7 +78,7 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 1800, function(){
+        var timer = new Counter('timer', 10, function(){
           stopDrawing(fb);
           document.getElementById('timer').style.display = 'none';
           document.getElementById('show-modal-btn').style.display = 'none';

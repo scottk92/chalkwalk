@@ -49,6 +49,9 @@ function recordCoordinates(fb) {
       // User pressed the stop button, so create a new empty array
       userCoords[user].push([]);
     }
+	if (!(data[name] in colorCoords)) {
+		colorCoords[user] = data.color;
+	}
   });
 }
 
