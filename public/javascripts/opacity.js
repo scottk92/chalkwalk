@@ -14,7 +14,7 @@ var changeOpacity = function(rangeid, elementid) {
 		},
 
         // Callback function
-        onSlideEnd: function(position) {
+        onSlideEnd: function(position, value) {
 			image.style.opacity = value / 100.0;
 		}
     });

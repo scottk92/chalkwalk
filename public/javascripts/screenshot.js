@@ -8,13 +8,7 @@ function createDrawing() {
   largestDimension  = Math.min(screen.availWidth, screen.availHeight);
   drawing.width = largestDimension;
   drawing.height = largestDimension;
- /* var inner = document.getElementById('inner');
-  var originalImage = document.getElementById('originalImage');
-  originalImage.src = localStorage.imageFile;
-  inner.appendChild(drawing);
-  var drawingImage = new Transform('outer', 'inner');
-  drawingImage.startListening();
-  */return drawing;
+  return drawing;
 }
 
 /* 

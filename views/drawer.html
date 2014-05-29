@@ -92,7 +92,7 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 10, function(){
+        var timer = new Counter('timer', 5, function(){
           stopDrawing(fb);
           /*document.getElementById('timer').innerHTML = "Your result!";
           document.getElementById('show-modal-btn').style.display = 'none';
@@ -100,11 +100,10 @@
           document.getElementById('paintbrush-container').style.display = 'none';
           document.getElementById("canvas-map").style.display = 'block';
           /*var image = drawImage(userCoords, colorCoords);
-          fb.child('drawnImage').push({'image':image});
-          window.location = "results.html";*/console.log(colorCoords);
+          */console.log(colorCoords);
 		  var image = createResultsPage(userCoords, colorCoords);
-          fb.child('drawnImage').push({'image':image.toDataURL()});
-          document.body.innerHTML = ""; document.body.appendChild(image);//window.location = "results.html";
+          fb.child('drawnImage').set({'image':image.toDataURL()});
+          window.location = '/results';
         });
         initializeEndGame(timer);
         
