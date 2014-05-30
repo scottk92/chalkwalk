@@ -42,10 +42,6 @@
       #paintbrush-container {
         margin-top:5%;
       }
-      #canvas-map { 
-        height: 100%; 
-        display: none;
-      }
     </style>
   </head>
   <body>
@@ -74,16 +70,12 @@
       <img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
       <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button>
     </div>
-    <div id="canvas-map"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/drawer.js"></script>
-    <script src="javascripts/canvas-map.js"></script>
-    <script src="javascripts/screenshot.js"></script>
-    <script src="javascripts/create_results.js"></script>
     <script src="javascripts/counter.js"></script>
     <script src="javascripts/endgame.js"></script>
     <script src="javascripts/fake_coords.js"></script>
@@ -93,10 +85,6 @@
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         var timer = new Counter('timer', 10, function(){
-          stopDrawing(fb);
-          console.log(colorCoords);
-		  var image = createResultsPage(userCoords, colorCoords);
-          fb.child('drawnImage').set({'image':image.toDataURL()});
           window.location = '/results';
         });
         initializeEndGame(timer);
@@ -118,9 +106,6 @@
 
         // Initialize geolocation tracking code that sends coordinates to Firebase
         initializeDrawing();
-
-        // Initialize the canvas map that will show the results in the end
-        initializeCanvasMap(fb, "canvas-map");
       });
     </script>
   </body>

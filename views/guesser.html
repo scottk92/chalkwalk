@@ -81,8 +81,7 @@
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         var timer = new Counter('timer', 10, function(){
-          stopDrawing(fb);
-		  var image = createResultsPage(userCoords, colorCoords);
+		      var image = createResultsPage(userCoords, colorCoords);
           fb.child('drawnImage').set({'image':image.toDataURL()});
           window.location = '/results';
         });

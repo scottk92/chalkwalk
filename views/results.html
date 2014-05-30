@@ -5,22 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chalk Walk - Results</title>
-
     <!-- Bootstrap -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="stylesheets/results.css" rel="stylesheet">
 		<link rel="stylesheet" href="stylesheets/rangeslider.js-0.2.8/dist/rangeslider.css">
-
-	
-    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
-    <script src="javascripts/hammer.js"></script>
-    <script src="javascripts/transform.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="javascripts/rangeslider.js-0.2.8/dist/rangeslider.min.js"></script>
-    <script src="javascripts/opacity.js"></script>
-    <script src="javascripts/screenshot.js"></script>
-    <script src="javascripts/results.js"></script>
-    <script src="javascripts/endgame.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,32 +17,51 @@
     <![endif]-->
   </head>
   <body>
-    <!-- Username Panel -->
-      <h1 >Your Result!</h1>
+    <h1 class="text-center">Your Result</h1>
+    <div class="text-center">
       <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
-    
-    <div class=images"><img id="originalImage" class="image" />
-  
-    <div id="outer"><div id="inner"><img id="drawnImage" class="image"/></div></div>
-	
-	</div>
-	
-			<input type="range" min="0" max="100" step="1" id="opacrange" />
+    </div>
+    <div class="images">
+      <img id="originalImage" class="image" />
+      <div id="outer">
+        <div id="inner">
+          <img id="drawnImage" class="image"/>
+        </div>
+      </div>
+    </div>
+		<input type="range" min="0" max="100" step="1" id="opacrange" />
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/panel-transition.js"></script>
-    <script src="javascripts/find-games.js"></script>
-    <script src="javascripts/create-games.js"></script>
-    <script>	var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
-	fb.child('drawnImage').on('value', function(dataSnapshot) {console.log(dataSnapshot.val());
-		
-		document.getElementById("drawnImage").src = dataSnapshot.val().image;
-	});
-document.getElementById("restart-game-btn").addEventListener("click", function(){
-		restartGame();
-	});
-		initializeResultsPage(document.getElementById("drawnImage"));
+    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+    <script src="javascripts/hammer.js"></script>
+    <script src="javascripts/transform.js"></script>
+    <script src="javascripts/rangeslider.js-0.2.8/dist/rangeslider.min.js"></script>
+    <script src="javascripts/opacity.js"></script>
+    <script src="javascripts/screenshot.js"></script>
+    <script src="javascripts/endgame.js"></script>
+    <script>  
+      var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
+      var drawing = document.getElementById("drawnImage");
+      fb.child('drawnImage').on('value', function(dataSnapshot) {
+        drawing.src = dataSnapshot.val().image;
+        document.getElementById('inner').appendChild(drawing);
+      });
+
+      // Original image
+      document.getElementById('originalImage').src = localStorage.imageFile;
+
+      // Transformation
+      var drawingImage = new Transform('outer', 'inner');
+      drawingImage.startListening();
+      changeOpacity("opacrange", "inner");
+
+      // Restart button
+      document.getElementById("restart-game-btn").addEventListener("click", function(){
+        restartGame();
+      });
     </script>
   </body>
 </html>

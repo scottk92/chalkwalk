@@ -1,5 +1,3 @@
-
-
 var largestDimension;
 
 // Creates drawing and associated containers, and adds to body
@@ -45,9 +43,9 @@ function recalibrate(points) {
   var max = Math.max(maxX, maxY);
   return shiftedPoints.map(function(point) {
     return {x: point.x/max*largestDimension, y: point.y/max*largestDimension};
-  });
-    
+  });   
 }
+
 function minCoord(axis, array) {
   if (axis === "x") {
     var min = array[0].x;for (var i = 0; i < array.length; i++) {
@@ -61,6 +59,7 @@ function minCoord(axis, array) {
   }
   return min;
 }
+
 function maxCoord(axis, array) {
   if (axis === "x") {
     var max = array[0].x;for (var i = 0; i < array.length; i++) {
