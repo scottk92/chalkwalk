@@ -71,7 +71,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/canvas-map.js"></script>
+    <script src="javascripts/screenshot.js"></script>
     <script src="javascripts/counter.js"></script>
+    <script src="javascripts/create_results.js"></script>
     <script src="javascripts/endgame.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function(){
@@ -80,9 +82,9 @@
         var numDrawersReady = 0;
         var timer = new Counter('timer', 10, function(){
           stopDrawing(fb);
-          document.getElementById('timer').style.display = 'none';
-          document.getElementById('show-modal-btn').style.display = 'none';
-          document.getElementById('restart-game-btn').style.display = 'block';
+		  var image = createResultsPage(userCoords, colorCoords);
+          fb.child('drawnImage').set({'image':image.toDataURL()});
+          window.location = '/results';
         });
         initializeEndGame(timer);
 

@@ -3,18 +3,21 @@ head, body {
 	width: 100%;
 }
 
-.image {
-	position: absolute;
-}
 
-#images {
-	position: relative;
+#drawnImage {
+	z-index: 2;
 }
 
 #originalImage {
 	margin-left: auto;
 	margin-right: auto;
 	z-index: -1;
+	position: absolute;
+}
+
+#images {
+	width: 100%;
+	height: 100%;
 }
 
 #outer {
@@ -25,4 +28,8 @@ head, body {
 #inner {
   display: inline-block;
   text-align: center;
+}
+
+#opacrange {
+	display: block;
 }
