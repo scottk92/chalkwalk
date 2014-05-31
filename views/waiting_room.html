@@ -45,6 +45,7 @@
   <body>
     <h1>Waiting Room</h1>
     <h2 id="game-name-header"></h2>
+    <button id="leave-game-btn" type="button" class="btn btn-danger">Leave Game</button>
     <p>Which position do you want to play?</p>
     <div id="drawer-guesser-options">
       <label class="radio-inline">
@@ -85,6 +86,7 @@
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var userRoleMap = {};
       var roleCounter = {Drawer:0, Guesser:0};
+
       document.addEventListener('DOMContentLoaded', function(){
         document.getElementById("game-name-header").innerHTML = localStorage.game + " Round " + localStorage.round;
         var colorBox = new ColorBox("color-options");
@@ -110,22 +112,31 @@
 
         // Listen to new users and add them to the table as they enter.
         var roleTable = new RoleTable("role-tbody", localStorage.game);
-        fb.child('users').on('child_added', function(snapshot) {
+        fb.child('users').on('child_added', function(snapshot){
           var newUser = snapshot.val();
           roleTable.addUserToTable(newUser.name, userRoleMap);
-          roleCounter.Drawer += 1;
+          roleCounter.Drawer++;
+        });
+
+        // Listen to users leaving the game and updating
+        fb.child('users_leave').on('child_added', function(snapshot){
+          var data = snapshot.val();
+          if (data.role == 'Drawer') roleCounter.Drawer--;
+          else roleCounter.Guesser--;
+          userRoleMap[data.username].parentNode.remove();
+          delete userRoleMap[data.username];
         });
 
         // Listen to role changes.  userRoleMap maps username to DOM td element.
-        fb.child('roleChanges').on('child_added', function(snapshot) {
+        fb.child('roleChanges').on('child_added', function(snapshot){
           var change = snapshot.val();
           userRoleMap[change.name].innerHTML = change.role;
           if (change.role == 'Drawer') {
-            roleCounter.Drawer += 1;
-            roleCounter.Guesser -= 1;
+            roleCounter.Drawer++;
+            roleCounter.Guesser--;
           } else {
-            roleCounter.Drawer -= 1;
-            roleCounter.Guesser += 1;
+            roleCounter.Drawer--;
+            roleCounter.Guesser++;
           }
         });
 
@@ -133,7 +144,7 @@
            Stores the random image that the master randomly selected in localStorage. */
         var startButton = new StartButton("start-game-btn", roleCounter, userRoleMap, "level-input", "level-input-container");
         startButton.initialize(localStorage.username);
-        fb.child('start').on('child_added', function(snapshot) {
+        fb.child('start').on('child_added', function(snapshot){
           localStorage.numDrawers = roleCounter.Drawer;
           localStorage.imageName = snapshot.val().answer;
           localStorage.imageFile = snapshot.val().file;
@@ -142,6 +153,12 @@
           } else {
             window.location = '/guesser';
           }
+        });
+
+        // Controls the leave game button
+        document.getElementById('leave-game-btn').addEventListener('click', function(){
+          fb.child('users_leave').push({username:localStorage.username, role:localStorage.role});       
+          window.location = '/';
         });
       });
     </script>

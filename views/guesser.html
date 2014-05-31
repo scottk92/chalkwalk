@@ -80,7 +80,7 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 10, function(){
+        var timer = new Counter('timer', 1000, function(){
 		      var image = createResultsPage(userCoords, colorCoords);
           fb.child('drawnImage').set({'image':image.toDataURL()});
           window.location = '/results';
