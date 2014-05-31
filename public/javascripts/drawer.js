@@ -22,7 +22,7 @@ var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' +
 
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
-  maximumAge = 5000; // increment maximum age back to 5000
+  //maximumAge = 5000; // increment maximum age back to 5000
   var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
   //if (hDist(pos, lastLocation) < THRESHOLD && hDist(pos, lastLocation) != 0) {
     rawCoords.push(position);
