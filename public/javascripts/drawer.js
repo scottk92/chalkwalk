@@ -15,15 +15,14 @@ function initializeDrawing() {
 }
 
 var calibrate = 0;
-var positionOptions = {
-  maximumAge: 5000
-};
+var maximumAge = 0; // start maximumAge off as 0
 var rawCoords = [];
 var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
 
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
+  maximumAge = 5000; // increment maximum age back to 5000
   var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
   //if (hDist(pos, lastLocation) < THRESHOLD && hDist(pos, lastLocation) != 0) {
     rawCoords.push(position);
@@ -84,7 +83,7 @@ function toggleDraw() {
     document.getElementById("paintbrush").innerHTML = "Pause Painting";
     isDrawing = true;
     calibrate = 0;
-    watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
+    watch = navigator.geolocation.watchPosition(setLocation, error, {maximumAge:maximumAge});
   }
 }
 
