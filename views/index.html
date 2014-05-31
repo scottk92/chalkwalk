@@ -38,7 +38,7 @@
       <form role="form">
         <div class="form-group">
           <label class="sr-only" for="nameInput">Name</label>
-          <input id="nameInput" type="text" class="form-control" placeholder="Scott">
+          <input id="nameInput" type="text" class="form-control user-input" placeholder="Scott">
         </div>
         <button id="name-submit-btn" type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
       </form>
@@ -53,7 +53,7 @@
         <div class="form-group">
           <p id="no-results-msg" class="bg-danger"></p>
           <label class="sr-only" for="gameNameQueryInput">Game Name</label>
-          <input id="gameNameQueryInput" type="text" class="form-control" placeholder="Enter Game name">
+          <input id="gameNameQueryInput" type="text" class="form-control user-input" placeholder="Enter Game name">
         </div>
         <button id="game-search-btn" type="button" class="btn btn-primary btn-lg btn-block">Search</button>
         <button id="go-to-create" type="button" class="btn btn-link">or Create a Game</button>
@@ -77,7 +77,7 @@
         <div class="form-group">
           <p id="failed-to-create-msg" class="bg-danger"></p>
           <label class="sr-only" for="createGameNameInput">Game Name</label>
-          <input id="createGameNameInput" type="text" class="form-control" placeholder="Enter Game name">
+          <input id="createGameNameInput" type="text" class="form-control user-input" placeholder="Enter Game name">
         </div>
         <button id="game-create-btn" type="button" class="btn btn-primary btn-lg btn-block">Create</button>
         <button id="go-to-search" type="button" class="btn btn-link">or Search for a Game</button>
@@ -106,7 +106,6 @@
           var username = document.getElementById("nameInput").value;
           if (username == "") alert("Username can't be blank");
           else {
-            document.getElementsByClassName("username-display");
             var usernameDisplays = document.getElementsByClassName("username-display");
             Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
               usernameDisplay.innerHTML = username;
@@ -140,6 +139,22 @@
         });
         document.getElementById("go-to-search").addEventListener("click", function(){
           showPanel(SEARCH_PANEL);
+        });
+
+        // Fix the enter button bug
+        var inputsToButtons = {nameInput: "name-submit-btn", gameNameQueryInput:"game-search-btn", createGameNameInput:"game-create-btn"}
+        var activeButton = document.getElementById(inputsToButtons['nameInput']);
+        var inputs = document.getElementsByClassName("user-input");
+        Array.prototype.filter.call(inputs, function(input){
+          input.addEventListener("click", function(){
+            activeButton = document.getElementById(inputsToButtons[input.id]);
+          });
+        });
+        document.addEventListener('keypress', function(e) {
+          if (e.keyCode == 13) {
+            e.preventDefault();
+            activeButton.click();
+          }
         });
       });
     </script>
