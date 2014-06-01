@@ -17,6 +17,11 @@ router.get('/prep', function(req, res) {
 });
 
 // GET drawing room
+router.get('/callibrate', function(req, res) {
+  res.render('callibrate');
+});
+
+// GET drawing room
 router.get('/drawer', function(req, res) {
   res.render('drawer');
 });
