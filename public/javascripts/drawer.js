@@ -16,7 +16,7 @@ function initializeDrawing() {
 
 var calibrate = 0;
 var positionOptions = {
-  maximumAge: 5000
+  maximumAge: 0
 };
 var rawCoords = [];
 var calibrateCoords = [];
@@ -85,6 +85,7 @@ function toggleDraw() {
     isDrawing = true;
     calibrate = 0;
     watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
+	positionOptions.maximumAge = 5000;
   }
 }
 
