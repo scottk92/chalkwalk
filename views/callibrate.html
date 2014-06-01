@@ -32,7 +32,7 @@
       document.addEventListener('DOMContentLoaded', function(){
         // Constants
         var GOOD_GPS_THRESHOLD = 15;
-        var TIME = 60000;
+        var TIME = 60;
         
         // watchPosition stuff
         var watch;
@@ -45,6 +45,7 @@
           localStorage.callibrate = count >= GOOD_GPS_THRESHOLD;
           window.location = "/";
         });
+        timer.countdown();
 
         // Count the number of coordinates that come in
         function success(position) {
