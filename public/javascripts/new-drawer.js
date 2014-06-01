@@ -15,7 +15,7 @@ function initializeDrawing() {
 }
 
 var calibrate = 0;
-var positionOptions = {maximumAge:0, timeout:3000};
+var positionOptions = {maximumAge:0};
 var rawCoords = [];
 var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');

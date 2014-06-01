@@ -11,3 +11,8 @@ coordsDB.push({'name':'B', 'lat':37.425041, 'lng':-122.170056, 'color':'#F2D43F'
 coordsDB.push({'name':'C', 'lat':37.425627, 'lng':-122.167453, 'color':'#048091'});
 coordsDB.push({'name':'C', 'lat':37.424696, 'lng':-122.166945, 'color':'#048091'});
 coordsDB.push({'name':'C', 'lat':37.424415, 'lng':-122.166430, 'color':'#048091'});
+
+coordsDB.push({'name':'C', 'lat':37.696446726758516, 'lng':-121.17909928356939, 'color':'#048091'});
+coordsDB.push({'name':'C', 'lat':37.419604, 'lng':-122.166987, 'color':'#048091'});
+coordsDB.push({'name':'C', 'lat':37.4200739, 'lng':-122.16870530000006, 'color':'#048091'});
+coordsDB.push({'name':'C', 'lat':37.4200739, 'lng':-122.16870530000006, 'color':'#048091'});
