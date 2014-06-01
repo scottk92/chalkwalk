@@ -11,7 +11,8 @@ var calibrate = 0;
 
 var positionOptions = {
   maximumAge: 0,
-  enableHighAccuracy: true
+  enableHighAccuracy: true,
+  timeout: 5000
 };
 
 var rawCoords = [];
@@ -95,4 +96,6 @@ function toggleDraw() {
   }
 }
 
-function error() {alert('error');}
+function error(error) {
+  alert(error);
+}
