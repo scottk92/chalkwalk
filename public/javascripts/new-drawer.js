@@ -15,11 +15,7 @@ function initializeDrawing() {
 }
 
 var calibrate = 0;
-
-var positionOptions = {
-  maximumAge: 0
-};
-
+var positionOptions = {maximumAge:0};
 var rawCoords = [];
 var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
@@ -27,13 +23,8 @@ var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' +
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
   //maximumAge = 5000; // increment maximum age back to 5000
+  //alert(position.coords.latitude + ", " + position.coords.longitude);
   var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
-  
-  // Debugging...
-  var listItem = document.createElement("li");
-  listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
-  document.getElementById("debug-coordinates").appendChild(listItem);
-
   //if (hDist(pos, lastLocation) < THRESHOLD && hDist(pos, lastLocation) != 0) {
     rawCoords.push(position);
     calibrate++;
@@ -41,6 +32,7 @@ function setLocation(position) {
       var calibratedPos = calibratedLoc();
       calibrateCoords.push(calibratedPos);
       coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
+      //alert("x");
     }
   //}
   lastLocation = pos;
@@ -86,16 +78,21 @@ function toggleDraw() {
     document.getElementById("paintbrush").className = "btn btn-success btn-lg btn-block";
     document.getElementById("paintbrush").innerHTML = "Start Painting";
     isDrawing = false;
-    navigator.geolocation.clearWatch(watch);
+    //navigator.geolocation.clearWatch(watch);
+    clearInterval(watch);
   } else {
     document.getElementById("paintbrush-img").style.opacity = 0.5;
     document.getElementById("paintbrush").className = "btn btn-danger btn-lg btn-block";
     document.getElementById("paintbrush").innerHTML = "Pause Painting";
     isDrawing = true;
     calibrate = 0;
-    watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
-	positionOptions.maximumAge = 5000;
+    //watch = navigator.geolocation.watchPosition(setLocation, error, {maximumAge:0, timeout:3000});
+    watch = setInterval(function(){findLocation()}, 5000);
   }
+}
+
+function findLocation() {
+  navigator.geolocation.getCurrentPosition(setLocation, error, positionOptions);
 }
 
 function error() {alert('error');}

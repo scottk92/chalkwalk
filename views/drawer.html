@@ -70,6 +70,7 @@
       <img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
       <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button>
     </div>
+    <ol id="debug-coordinates">Coordinates</ol>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -78,19 +79,19 @@
     <script src="javascripts/drawer.js"></script>
     <script src="javascripts/counter.js"></script>
     <script src="javascripts/endgame.js"></script>
-    <script src="javascripts/fake_coords.js"></script>
+    <!--script src="javascripts/fake_coords.js"></script-->
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         var timer = new Counter('timer', 1000, function(){
-          window.location = '/results';
+          //window.location = '/results';
         });
         initializeEndGame(timer);
         
         // Enter the drawing room and send Firebase an event
-        fb.child('drawers').push({'name':localStorage.username});
+        fb.child('drawers').push({username:localStorage.username, color:localStorage.color});
 
         // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
         fb.child('drawers').on('child_added', function(snapshot) {
