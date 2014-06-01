@@ -83,7 +83,7 @@
         var timer = new Counter('timer', 1000, function(){
 		      var image = createResultsPage(userCoords, colorCoords);
           fb.child('drawnImage').set({'image':image.toDataURL()});
-          window.location = '/results';
+          //window.location = '/results';
         });
         initializeEndGame(timer);
 
