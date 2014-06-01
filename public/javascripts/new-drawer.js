@@ -32,7 +32,7 @@ function setLocation(position) {
       var calibratedPos = calibratedLoc();
       calibrateCoords.push(calibratedPos);
       coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
-      alert("x");
+      //alert("x");
     }
   //}
   lastLocation = pos;
@@ -87,7 +87,7 @@ function toggleDraw() {
     isDrawing = true;
     calibrate = 0;
     //watch = navigator.geolocation.watchPosition(setLocation, error, {maximumAge:0, timeout:3000});
-    watch = setInterval(function(){findLocation()}, 3000);
+    watch = setInterval(function(){findLocation()}, 5000);
   }
 }
 

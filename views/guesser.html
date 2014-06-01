@@ -62,6 +62,7 @@
     <div id="countdown-container">
       <h1 id="timer">0:00</h1>
       <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
+      <button id="recenter-btn" type="button" class="btn btn-primary">Recenter</button>
       <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
     </div>
     <div id="canvas-map"></div>
@@ -96,6 +97,10 @@
             document.getElementById('countdown-container').style.display = 'block';
             timer.countdown();
           }
+        });
+
+        document.getElementById("recenter-btn").addEventListener("click", function(){
+          recenter();
         });
 
         // Initialize the map and set up event listeners

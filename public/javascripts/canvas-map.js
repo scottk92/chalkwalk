@@ -1,6 +1,7 @@
 var canvasMap;
 var userCoords = {};
 var colorCoords = {};
+var center;
 
 // Load the map and set up event listener for drawing on the map
 function initializeCanvasMap(fb, mapId) {
@@ -13,9 +14,10 @@ function initializeCanvasMap(fb, mapId) {
         ]
       }
     ];
+    center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     var mapOptions = {
       zoom: 18,
-      center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+      center: center,
       disableDefaultUI: true,
     };
     canvasMap = new google.maps.Map(document.getElementById(mapId), mapOptions);
@@ -71,4 +73,9 @@ function drawLine(pos1, pos2, color) {
 // Stop tracking
 function stopDrawing(fb) {
   fb.child('coords').off('child_added');
+}
+
+// Recenters the map
+function recenter() {
+  canvasMap.setCenter(center);
 }
