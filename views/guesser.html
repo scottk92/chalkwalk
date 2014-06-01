@@ -64,6 +64,7 @@
       <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
       <button id="recenter-btn" type="button" class="btn btn-primary">Recenter</button>
       <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
+      <ul id="user-color-list">Drawers:</ul>
     </div>
     <div id="canvas-map"></div>
 
@@ -84,12 +85,22 @@
         var timer = new Counter('timer', 1000, function(){
 		      var image = createResultsPage(userCoords, colorCoords);
           fb.child('drawnImage').set({'image':image.toDataURL()});
-          //window.location = '/results';
+          window.location = '/results';
         });
         initializeEndGame(timer);
 
+        // Record a user's color on the guesser's page
+        function recordUserColor(username, color) {
+          var listItem = document.createElement("li");
+          listItem.innerHTML = username;
+          listItem.style.color = color;
+          document.getElementById("user-color-list").appendChild(listItem);
+        }
+
         // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
         fb.child('drawers').on('child_added', function(snapshot) {
+          var data = snapshot.val();
+          recordUserColor(data.username, data.color);
           numDrawersReady++;
           if (numDrawersReady == localStorage.numDrawers) {
             alert("Start guessing!!!");
@@ -99,6 +110,7 @@
           }
         });
 
+        // Recenter button
         document.getElementById("recenter-btn").addEventListener("click", function(){
           recenter();
         });

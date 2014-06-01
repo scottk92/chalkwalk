@@ -16,6 +16,7 @@ Guessers : sees everybody's progress
 
 localStorage
 ------------
+- color: Color that the drawer chose.
 - game: Name of the game that the user is currently playing.
 - imageFile: The file name of the random image assigned to the game.
 - imageName: The name of the random image assigned to the game.

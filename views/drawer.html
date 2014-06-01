@@ -90,7 +90,7 @@
         initializeEndGame(timer);
         
         // Enter the drawing room and send Firebase an event
-        fb.child('drawers').push({'name':localStorage.username});
+        fb.child('drawers').push({username:localStorage.username, color:localStorage.color});
 
         // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
         fb.child('drawers').on('child_added', function(snapshot) {
