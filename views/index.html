@@ -93,7 +93,11 @@
     <script src="javascripts/create-games.js"></script>
     <script>
       // Refresh everything
-      localStorage.clear();
+      if (localStorage.callibrate == undefined) window.location = '/callibrate';
+      else {
+        var localVariables = ['color', 'game', 'imageFile', 'imageName', 'numDrawers', 'round', 'waiting'];
+        for (var i=0; i<localVariables.length; i++) localStorage.removeItem(localVariables[i]);
+      }
       
       // Panel constants
       var NAME_PANEL = 0;
@@ -101,6 +105,9 @@
       var CREATE_PANEL = 2;
 
       document.addEventListener('DOMContentLoaded', function(){
+        // Skip directly to search if the user has already entered his or her name
+        if (localStorage.username != undefined) showPanel(SEARCH_PANEL);
+
         // Control the username panel
         document.getElementById("name-submit-btn").addEventListener("click", function(){
           var username = document.getElementById("nameInput").value;

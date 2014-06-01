@@ -17,8 +17,9 @@
   </head>
   <body>
     <h1>Please walk around while we calibrate your GPS</h1>
+    <h1 id="timer"></h1>
     <ul>Coordinates received:
-      <li id="num-coordinates"></li>
+      <li id="num-coordinates">0</li>
     </ul>
 
 
@@ -26,22 +27,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/counter.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Constants
         var GOOD_GPS_THRESHOLD = 15;
         var TIME = 60000;
         
+        // watchPosition stuff
         var watch;
         var positionOptions = {maximumAge:0};
         var count = 0;
 
         // Save the result and transition to the next page
-        function endTimer() {
+        var timer = new Counter('timer', TIME, function(){
           navigator.geolocation.clearWatch(watch);
           localStorage.callibrate = count >= GOOD_GPS_THRESHOLD;
-          alert(localStorage.callibrate);
-        }
+          window.location = "/";
+        });
 
         // Count the number of coordinates that come in
         function success(position) {
@@ -50,6 +53,7 @@
           document.getElementById("num-coordinates").innerHTML = count;
         }
 
+        // Simple error
         function error() {
           alert("There was an error. Please make sure your GPS is turned on and then refresh the page.");
         }

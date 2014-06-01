@@ -3,15 +3,8 @@ var EARTH_RADIUS = 6370;
 var NUM_POINTS = 3;
 var THRESHOLD = 0.01;
 
-// Initialize last location
-var lastLocation;
 function initializeDrawing() {
   document.getElementById("paintbrush").onclick = toggleDraw;
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;  
-    lastLocation = new google.maps.LatLng(latitude, longitude);
-  });
 }
 
 var calibrate = 0;
@@ -34,7 +27,8 @@ function setLocation(position) {
   listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
   document.getElementById("debug-coordinates").appendChild(listItem);
 
-  //if (hDist(pos, lastLocation) < THRESHOLD && hDist(pos, lastLocation) != 0) {
+  if (localStorage.callibrate) {
+    // Weighted average algorithm to refine the coordinates
     rawCoords.push(position);
     calibrate++;
     if (calibrate % NUM_POINTS == 0) {
@@ -42,8 +36,10 @@ function setLocation(position) {
       calibrateCoords.push(calibratedPos);
       coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
     }
-  //}
-  lastLocation = pos;
+  } else {
+    // Don't bother callibrating it
+    coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
+  }
 }
 
 // Uses weighted average algorithm to calibrate location
@@ -94,7 +90,7 @@ function toggleDraw() {
     isDrawing = true;
     calibrate = 0;
     watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
-	positionOptions.maximumAge = 5000;
+	 //positionOptions.maximumAge = 5000;
   }
 }
 
