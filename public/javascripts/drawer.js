@@ -10,7 +10,8 @@ function initializeDrawing() {
 var calibrate = 0;
 
 var positionOptions = {
-  maximumAge: 0
+  maximumAge: 0,
+  enableHighAccuracy: true
 };
 
 var rawCoords = [];
