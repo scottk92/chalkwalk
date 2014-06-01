@@ -47,8 +47,7 @@
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var drawing = document.getElementById("drawnImage");
       fb.child('drawnImage').on('value', function(dataSnapshot) {
-        drawing.src = dataSnapshot.val().image;
-        document.getElementById('inner').appendChild(drawing);
+        drawing.src = dataSnapshot.val().image;console.log(drawing.src);
       });
 
       // Original image

@@ -14,13 +14,13 @@ function createDrawing() {
    drawing: object representing drawing (from createDrawing)
    points: array of points to draw (in lat-lng)
 */
-function drawPoints(color, drawing, points, minX, minY, max) {
-  var context = drawing.getContext('2d');
+function drawPoints(color, drawing, points, max) {
+  var context = drawing.getContext('2d');context.lineWidth = 5;
   context.beginPath();
-  var projectedPoints = recalibrate((points), minX, minY, max);
+  var projectedPoints = recalibrateScale((points), max);
+  console.log(projectedPoints);
   for (var i = 0; i < projectedPoints.length - 1; i++) {
     context.moveTo(projectedPoints[i].x, projectedPoints[i].y);
-    console.log(projectedPoints[i].x, projectedPoints[i].y);
     context.lineTo(projectedPoints[i+1].x, projectedPoints[i+1].y);
   }
   context.strokeStyle = color;
@@ -33,12 +33,14 @@ function globeToPoint(points) {
   });
 }
 
-function recalibrate(points, minX, minY, max) {  
-
-  var shiftedPoints = points.map(function(point) {
+function recalibrateShift(points, minX, minY) {  
+  return  points.map(function(point) {
     return {x: point.x-minX, y:point.y-minY};
   });
-  return shiftedPoints.map(function(point) {
-    return {x: point.x/max*largestDimension, y: point.y/max*largestDimension};
-  });   
+}
+
+function recalibrateScale(points, max) {
+	return points.map(function(point) {
+		return {x:point.x/max*largestDimension, y:point.y/max*largestDimension};
+	});
 }

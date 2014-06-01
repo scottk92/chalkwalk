@@ -2,23 +2,30 @@ var createResultsPage = function(coordHash, colorHash) {
 	//create canvas
 	var image = createDrawing();
 	
-	var nameList = Object.keys(coordHash);console.log(nameList);
+	var nameList = Object.keys(coordHash);console.log(coordHash);
 	for (var i = 0; i < nameList.length; i++) {
-		for (var j = 0; j < coordHash[nameList[i]].length; ++j) {
-			coordHash[nameList[i]][j] = globeToPoint(coordHash[nameList[i]][j]);console.log(coordHash[nameList[i]][j]);
-			}
+		for (var j = 0; j < coordHash[nameList[i]].length; j++) {
+			coordHash[nameList[i]][j] = globeToPoint(coordHash[nameList[i]][j]);
+		}
 	}
+
 	var minX = totalMin('x', coordHash);
-	var minY = totalMin('y', coordHash);console.log(coordHash);
+	var minY = totalMin('y', coordHash);
+	for (name in coordHash) {
+		for (i = 0; i < coordHash[name].length; i++) {
+			coordHash[name][i] = recalibrateShift(coordHash[name][i], minX, minY);
+		}
+	}
 	var max = Math.max(totalMax('x', coordHash), totalMax('y', coordHash));
-	for ( i = 0; i < nameList.length; i++) {console.log(minX, minY,max);
 	
+	console.log(max);
+	for ( i = 0; i < nameList.length; i++) {
 		var player = nameList[i];
 		var color = colorHash[player];
 		var lines = coordHash[player];
 		for (var numLines = 0; numLines < lines.length; numLines++) {
 			var line = lines[numLines];
-			drawPoints(color, image, line, minX, minY, max);
+			drawPoints(color, image, line, max);
 		}
 	}
   return image;
@@ -27,12 +34,12 @@ var createResultsPage = function(coordHash, colorHash) {
 function totalMin(axis, coordHash) {
 	
 	var min = 50000000;
-	for (name in coordHash) {
-		for (line in coordHash[name]) {console.log(line);
-			if (min > minCoord(axis, line))
-				min = minCoord(axis, line);
+	for (name in coordHash) {console.log(name);
+		for (var i = 0; i < coordHash[name].length; i++) {
+			if (min > minCoord(axis, coordHash[name][i]))
+				min = minCoord(axis, coordHash[name][i]);
 		}
-	}console.log(coordHash);
+	}
 	return min;
 }
 
@@ -40,9 +47,9 @@ function totalMax(axis, coordHash) {
 	
 	var max = 0;
 	for (name in coordHash) {
-		for (line in coordHash[name]) {
-			if (max < maxCoord(axis, line))
-				max = maxCoord(axis, line);
+		for (var i = 0; i < coordHash[name].length; i++) {
+			if (max < maxCoord(axis, coordHash[name][i]))
+				max = maxCoord(axis, coordHash[name][i]);
 		}
 	}
 	return max;
