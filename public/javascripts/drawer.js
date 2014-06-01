@@ -15,7 +15,11 @@ function initializeDrawing() {
 }
 
 var calibrate = 0;
-var positionOptions = {maximumAge:0};
+
+var positionOptions = {
+  maximumAge: 0
+};
+
 var rawCoords = [];
 var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
@@ -90,6 +94,7 @@ function toggleDraw() {
     isDrawing = true;
     calibrate = 0;
     watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
+	positionOptions.maximumAge = 5000;
   }
 }
 
