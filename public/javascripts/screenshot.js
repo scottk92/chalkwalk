@@ -3,9 +3,12 @@ var largestDimension;
 // Creates drawing and associated containers, and adds to body
 function createDrawing() {
   var drawing = document.createElement('canvas');
+  var context = drawing.getContext('2d');
   largestDimension  = Math.min(screen.availWidth, screen.availHeight);
   drawing.width = largestDimension;
   drawing.height = largestDimension;
+  context.fillStyle = '#ffffff';
+  context.fillRect(0,0,drawing.width,drawing.height);
   return drawing;
 }
 
