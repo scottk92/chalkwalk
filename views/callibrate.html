@@ -14,42 +14,71 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      #time-bar {
+        width: 0%;
+      }
+      #results-summary-container {
+        display: none;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <h1>Please walk around while we calibrate your GPS</h1>
-    <h1 id="timer"></h1>
-    <ul>Coordinates received:
-      <li id="num-coordinates">0</li>
-    </ul>
+    <h1>Measuring GPS strength...</h1>
+    <div class="progress progress-striped active">
+      <div id="time-bar" class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50">
+        <span class="sr-only">Time bar</span>
+      </div>
+    </div>
+    <div id="results-summary-container">
+      <div id="alert-message" class="alert"></div>
+      <button id="redirect-btn" type="button" class="btn btn-primary btn-lg btn-block">Continue to Chalkwalk</button>
+    </div>
+    <p>Coordinates received: 
+      <span id="num-coordinates" class="badge">0</span>
+    </p>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/counter.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Constants
         var GOOD_GPS_THRESHOLD = 15;
-        var TIME = 60;
-        
-        // watchPosition stuff
-        var watch;
-        var positionOptions = {maximumAge:0, enableHighAccuracy: true};
-        var count = 0;
+        var TOTAL_TIME = 10;
 
-        // Save the result and transition to the next page
-        var timer = new Counter('timer', TIME, function(){
+        // Control the progress bar
+        var timePassed = 0;
+        var widthPercent = 0;
+        var timer = setInterval(function(){
+          timePassed++;
+          widthPercent = (timePassed/TOTAL_TIME) * 100;
+          document.getElementById("time-bar").style.width = widthPercent.toString() + "%";
+          if (timePassed == TOTAL_TIME) endTimer();
+        }, 1000);
+
+        // Save the results and transition over to the next page
+        function endTimer() {
           navigator.geolocation.clearWatch(watch);
+          clearInterval(timer);
           localStorage.callibrate = count >= GOOD_GPS_THRESHOLD;
-          window.location = "/";
-        });
-        timer.countdown();
+          var alertMessage = document.getElementById("alert-message");
+          if (count >= GOOD_GPS_THRESHOLD) { 
+            alertMessage.innerHTML = "Nice, your GPS is pretty strong. It receives " + count + " per minute.";
+            alertMessage.className = alertMessage.className + " alert-success";
+          } else {
+            alertMessage.innerHTML = "Yikes, your GPS isn't too good. It only receives " + count + " per minute. You may want to consider turning on your GPS, Wifi, or switching to a different mobile browser or device.";
+            alertMessage.className = alertMessage.className + " alert-warning";
+          }
+          document.getElementById("results-summary-container").style.display = 'block';
+        }
 
         // Count the number of coordinates that come in
+        var count = 0;
         function success(position) {
-          if (count == 0) setTimeout(function(){endTimer();}, TIME);
           count++;
           document.getElementById("num-coordinates").innerHTML = count;
         }
@@ -59,7 +88,14 @@
           alert("There was an error. Please make sure your GPS is turned on and then refresh the page.");
         }
 
-        watch = navigator.geolocation.watchPosition(success, error, positionOptions);
+        // watchPosition stuff
+        var positionOptions = {maximumAge:0, enableHighAccuracy: true};
+        var watch = navigator.geolocation.watchPosition(success, error, positionOptions);
+
+        // Redirect button
+        document.getElementById("redirect-btn").addEventListener("click", function(){
+          window.location = "/";
+        })
       });
     </script>
   </body>

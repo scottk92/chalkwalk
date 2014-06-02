@@ -29,7 +29,7 @@ function setLocation(position) {
   listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
   document.getElementById("debug-coordinates").appendChild(listItem);
 
-  if (localStorage.callibrate) {
+  if (localStorage.callibrate == "true") {
     // Weighted average algorithm to refine the coordinates
     rawCoords.push(position);
     calibrate++;
