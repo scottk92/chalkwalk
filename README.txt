@@ -16,6 +16,7 @@ Guessers : sees everybody's progress
 
 localStorage
 ------------
+- callibrate: Boolean flag to see if the user's coordinates should be callibrated.
 - color: Color that the drawer chose.
 - game: Name of the game that the user is currently playing.
 - imageFile: The file name of the random image assigned to the game.
