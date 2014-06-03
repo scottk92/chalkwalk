@@ -18,6 +18,10 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
       #timer {
         /*position: absolute;
         z-index: 101;*/
@@ -43,10 +47,12 @@
         margin-top:5%;
         width: 100%;
       }
-      #knob {width: 50%;}
+      #knob {width: 75%;}
       #drawing-on {color:green;}
       #drawing-off {color:red;}
       #drawing-on, #drawing-off {display: none;}
+
+      #debug-coordinates {display: none}
     </style>
   </head>
   <body>
@@ -117,6 +123,9 @@
 
         // Initialize geolocation tracking code that sends coordinates to Firebase
         initializeDrawing();
+
+        // Stop scrolling so the wheel shows better
+        $('body').bind('touchmove', function(e){e.preventDefault()})
       });
     </script>
   </body>
