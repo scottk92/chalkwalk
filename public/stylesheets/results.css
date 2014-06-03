@@ -47,3 +47,7 @@ head, body {
 	width:20%;
 	display: block;
 }
+
+.rangeslider {
+	margin-top: 15px; margin-bottom:15px;
+}

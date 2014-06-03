@@ -17,20 +17,19 @@
     <![endif]-->
   </head>
   <body>
-    <h1 class="text-center" id="header">Rotate and scale your image!</h1>
+    <h1 class="text-center" id="header">Adjust your image!</h1>
     <div class="text-center">
-      <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
-		<button id="scale-done" type="button" class="btn btn-primary btn-lg">Done With Image</button>
-		</div>
+		<button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Again</button>
+		<button id="scale-done" type="button" class="btn btn-primary btn-lg">Done</button>
+	</div>
       
-	  <div class="oImage"><img id="originalImage" class="image" /></div>
-      <div id="outer">
-        <div id="inner">
-          <img id="drawnImage" class="image"/>
+	<input type="range" min="0" max="100" step="1" id="opacrange" />
+	<div class="oImage"><img id="originalImage" class="image" /></div>
+    <div id="outer">
+		<div id="inner">
+			<img id="drawnImage" class="image"/>
         </div>
-      </div>
-		<input type="range" min="0" max="100" step="1" id="opacrange" />
-
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -46,31 +45,32 @@
       // Initialize
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var drawing = document.getElementById("drawnImage");
-      fb.child('drawnImage').on('value', function(dataSnapshot) {
-        drawing.src = dataSnapshot.val().image;console.log(drawing.src);
-      });
+      
+	  fb.child('drawnImage').on('child_added', function(dataSnapshot) {
+        console.log(dataSnapshot.val());drawing.src = dataSnapshot.val();
+		var drawingImage = new Transform('outer', 'inner');
+		drawingImage.startListening();
+		document.getElementById("scale-done").addEventListener("click", function() {
+			document.body.innerHTML = "<h1 class=\"text-center\" id=\"header\">Your result!</h1><div class=\"text-center\">"
+				+ "<button id=\"restart-game-btn\" type=\"button\" class=\"btn btn-primary btn-lg\">Play Another Round</button>"
+				+ "</div><div id=\"outer2\"><div id=\"inner2\">"
+				+ drawing.outerHTML + "</div></div>";
+		document.getElementById('drawnImage').src = drawing.src;
+		document.getElementById("restart-game-btn").addEventListener("click", function(){
+			restartGame();
+		});
+		});});
 
       // Original image
       document.getElementById('originalImage').src = localStorage.imageFile;
 
       // Transformation
-      var drawingImage = new Transform('outer', 'inner');
-      drawingImage.startListening();
       changeOpacity("opacrange", "inner");
 
       // Restart button
       document.getElementById("restart-game-btn").addEventListener("click", function(){
         restartGame();
       });
-	  document.getElementById("scale-done").addEventListener("click", function() {
-		document.body.innerHTML = "<h1 class=\"text-center\" id=\"header\">Your result!</h1><div class=\"text-center\">"
-			+ "<button id=\"restart-game-btn\" type=\"button\" class=\"btn btn-primary btn-lg\">Play Another Round</button>"
-			+ "</div><div id=\"outer2\"><div id=\"inner2\">"
-			+ drawing.outerHTML + "</div></div>";
-		document.getElementById('drawnImage').src = drawing.src;document.getElementById("restart-game-btn").addEventListener("click", function(){
-        restartGame();
-      });
-		});
     </script>
   </body>
 </html>
