@@ -41,7 +41,12 @@
       }
       #paintbrush-container {
         margin-top:5%;
+        width: 100%;
       }
+      #knob {width: 50%;}
+      #drawing-on {color:green;}
+      #drawing-off {color:red;}
+      #drawing-on, #drawing-off {display: none;}
     </style>
   </head>
   <body>
@@ -67,8 +72,11 @@
       <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
     </div>
     <div id="paintbrush-container">
-      <img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
-      <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button>
+      <!--img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
+      <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button-->
+      <h1 id="drawing-on">Drawing ON!</h1>
+      <h1 id="drawing-off">Drawing OFF</h1>
+      <img id="knob" src="http://www.greensock.com/draggable/img/knob_bg.jpg" alt="knob" />
     </div>
     <ol id="debug-coordinates">Coordinates</ol>
 
@@ -76,9 +84,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/drawer.js"></script>
+    <script src="javascripts/magic-drawer.js"></script>
     <script src="javascripts/counter.js"></script>
     <script src="javascripts/endgame.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="javascripts/Draggable.min.js"></script>
     <!--script src="javascripts/fake_coords.js"></script-->
     <script>
       document.addEventListener('DOMContentLoaded', function(){
