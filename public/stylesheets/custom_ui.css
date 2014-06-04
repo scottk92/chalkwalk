@@ -1,0 +1,40 @@
+.cwBanner {
+	background: linear-gradient(#C2EFF2, #42C6CF 85%);
+	border-bottom: 3px solid #B1DDE0;
+}
+
+.cwTitle {
+	color: white;
+}
+
+.cwButton {
+	color: white;
+	background-color: #42C6CF;
+	border: 1px solid #C8D7DE;
+}
+
+.cwButton:active, .cwButton.active {
+	color: black;
+	background-color: #B1DDE0;
+	border: 1px solid #C8D7DE;
+}
+
+.content:before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: url('../images/logo_trans.png');
+	background-image: url('../images/logo_trans.png');
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center; 
+	opacity: 0.3;
+}
+
+.logoBG {
+	background-color: rgba(177, 221, 224, 0.2);
+}
