@@ -3,14 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <title>Chalk Walk - Gameroom</title>
 
-	<!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-
     <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes" />
 
@@ -47,17 +43,14 @@
     </style>
   </head>
   <body>
-  
 	<script> 
-		 var currentTime = new Date();
-	  //if last time stamp was more than a day ago
-	  
-	  
-	  if ((localStorage.lastTimeStamp == undefined) || (currentTime - new Date(localStorage.lastTimeStamp)) > 10000) {
-		localStorage.lastTimeStamp = currentTime;
-		window.location = '/logo';	  
-      } 
-	 </script>
+		var currentTime = new Date();
+		//if last time stamp was more than a day ago
+		if ((localStorage.lastTimeStamp == undefined) || (currentTime - new Date(localStorage.lastTimeStamp)) > 43200000) {
+			localStorage.lastTimeStamp = currentTime;
+			window.location = '/logo';	  
+		} 
+	</script>
 	
 	<header class="bar bar-nav cwBanner">
       <h1 class="title cwTitle">Start a Game</h1>
