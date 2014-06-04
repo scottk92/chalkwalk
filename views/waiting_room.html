@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ChalkWalk - Waiting Room</title>
+	
+	<!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Include the compiled Ratchet CSS and custom CSS-->
+    <link href="stylesheets/ratchet.min.css" rel="stylesheet">
+	<link href="stylesheets/custom_ui.css" rel="stylesheet">	
 
     <!-- Bootstrap -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -43,40 +54,48 @@
     </style>
   </head>
   <body>
-    <h1>Waiting Room</h1>
-    <h2 id="game-name-header"></h2>
-    <button id="leave-game-btn" type="button" class="btn btn-danger">Leave Game</button>
-    <p>Which position do you want to play?</p>
-    <div id="drawer-guesser-options">
-      <label class="radio-inline">
-        <input type="radio" checked name="optionsRadios" id="drawerRadio" class="roleRadioButton" value="Drawer"> Drawer
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="optionsRadios" id="guesserRadio" class="roleRadioButton" value="Guesser"> Guesser
-      </label>
-    </div>
+	<header class="bar bar-nav cwBanner">
+      <h1 class="title cwTitle">Waiting Room</h1>
+    </header>
+	
+	 <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 
-    <div id='level-input-container'>
-      <p>Select a level:</p>
-      <select id='level-input' class="form-control">
-        <option value='easy' selected="selected">Easy</option>
-        <option value='medium'>Medium</option>
-        <option value='hard'>Hard</option>
-      </select>
-    </div>
+	<div class="content logoBG">
+		<h2 id="game-name-header"></h2>
+		<button id="leave-game-btn" type="button" class="btn btn-danger">Leave Game</button>
+		<p>Which position do you want to play?</p>
+		<div id="drawer-guesser-options">
+		  <label class="radio-inline">
+			<input type="radio" checked name="optionsRadios" id="drawerRadio" class="roleRadioButton" value="Drawer"> Drawer
+		  </label>
+		  <label class="radio-inline">
+			<input type="radio" name="optionsRadios" id="guesserRadio" class="roleRadioButton" value="Guesser"> Guesser
+		  </label>
+		</div>
 
-    <div id="color-options">
-      <div id="pick-a-color">Pick a color:</div>
-    </div>
+		<div id='level-input-container'>
+		  <p>Select a level:</p>
+		  <select id='level-input' class="form-control">
+			<option value='easy' selected="selected">Easy</option>
+			<option value='medium'>Medium</option>
+			<option value='hard'>Hard</option>
+		  </select>
+		</div>
 
-    <table class="table table-striped">
-      <tbody id="role-tbody"></tbody>
-    </table>
-    <button id="start-game-btn" type="button" class="btn btn-primary btn-lg btn-block">Start Game</button>
+		<div id="color-options">
+		  <div id="pick-a-color">Pick a color:</div>
+		</div>
 
+		<table class="table table-striped">
+		  <tbody id="role-tbody"></tbody>
+		</table>
+		<button id="start-game-btn" type="button" class="btn btn-lg cwButton btn-block">Start Game</button>
+
+	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="javascripts/ratchet.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
     <script src="javascripts/role-table.js"></script>
     <script src="javascripts/random-image.js"></script>
