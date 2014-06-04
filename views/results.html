@@ -58,19 +58,18 @@
       var drawing = document.getElementById("drawnImage");
       
 	  fb.child('drawnImage').on('value', function(dataSnapshot) {
-        console.log(dataSnapshot.val());drawing.src = dataSnapshot.val();
+        console.log(document.body.childNodes);console.log(dataSnapshot.val());drawing.src = dataSnapshot.val();
 		var drawingImage = new Transform('outer', 'inner');
 		drawingImage.startListening();
 		document.getElementById("scale-done").addEventListener("click", function() {
-			document.body.innerHTML = "<h1 class=\"text-center\" id=\"header\">Your result!</h1><div class=\"text-center\">"
-				+ "<button id=\"restart-game-btn\" type=\"button\" class=\"btn btn-primary btn-lg\">Play Another Round</button>"
-				+ "</div><div id=\"outer2\"><div id=\"inner2\">"
-				+ drawing.outerHTML + "</div></div>";
-		document.getElementById('drawnImage').src = drawing.src;
-		document.getElementById("restart-game-btn").addEventListener("click", function(){
-			restartGame();
+			document.getElementById('scale-done').parentNode.removeChild(document.getElementById('scale-done'));
+			document.getElementById('header').innerHTML = "Your result!";
+			document.getElementsByClassName('rangeslider')[0].parentNode.removeChild(document.getElementsByClassName('rangeslider')[0]);
+			document.getElementById('originalImage').parentNode.removeChild(document.getElementById('originalImage'));
+			document.getElementById('drawnImage').style.opacity = 1;
+			document.getElementById('outer').setAttribute('id', 'outer2');
 		});
-		});});
+	});
 
       // Original image
       document.getElementById('originalImage').src = localStorage.imageFile;
