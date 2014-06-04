@@ -49,7 +49,7 @@
 	  //if last time stamp was more than a day ago
 	  
 	  
-	  if ((localStorage.lastTimeStamp == undefined) || (currentTime - new Date(localStorage.lastTimeStamp)) > 10000) {
+	  if ((localStorage.lastTimeStamp == undefined) || (currentTime - new Date(localStorage.lastTimeStamp)) > 43200000) {
 		localStorage.lastTimeStamp = currentTime;
 		window.location = '/logo';	  
       } 
