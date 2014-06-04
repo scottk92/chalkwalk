@@ -19,6 +19,18 @@
 	border: 1px solid #C8D7DE;
 }
 
+.cwButton-neg {
+	color: white;
+	background-color: #D05D86;
+	border: 1px solid #D05D86;
+}
+
+.cwButton-neg:active, .cwButton-neg.active {
+	color: black;
+	background-color: #FFE1D1;
+	border: 1px solid #C8D7DE;
+}
+
 .content:before {
 	content: "";
 	position: absolute;
@@ -29,9 +41,8 @@
 	right: 0;
 	background: url('../images/logo_trans.png');
 	background-image: url('../images/logo_trans.png');
-	background-size: 200px;
+	background-size: 300px;
 	background-repeat:no-repeat;
-	background-attachment:fixed;
 	background-position:center; 
 	opacity: 0.3;
 }
