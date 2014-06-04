@@ -50,6 +50,11 @@ router.get('/results', function(req, res) {
   res.render('results');
 });
 
+// GET logo
+router.get('/logo', function(req, res) {
+	res.render('logo');
+});
+
 // POST Create a game
 router.post('/create/:gameName/:username', function(req, res) {
 	var gameName = req.params.gameName;
