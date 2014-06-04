@@ -1,0 +1,7 @@
+.logo {
+	background-image: url('../images/cw-logo.png');
+	background-color: #B1DDE0;
+	background-repeat:no-repeat;
+	background-size: contain;
+	background-position:center; 
+}
