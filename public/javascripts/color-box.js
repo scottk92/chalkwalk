@@ -1,4 +1,5 @@
 var colorLibrary = [
+	'#CB0D1B', // red
 	'#D1026C', // pink
 	'#F2D43F', // yellow
 	'#61C155', // green
