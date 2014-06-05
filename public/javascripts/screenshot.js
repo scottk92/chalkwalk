@@ -12,11 +12,9 @@ function createDrawing() {
   return drawing;
 }
 
-/* 
-   color: color to draw path
+/* color: color to draw path
    drawing: object representing drawing (from createDrawing)
-   points: array of points to draw (in lat-lng)
-*/
+   points: array of points to draw (in lat-lng)*/
 function drawPoints(color, drawing, points, max) {
   var context = drawing.getContext('2d');context.lineWidth = 5;
   context.beginPath();
@@ -30,10 +28,8 @@ function drawPoints(color, drawing, points, max) {
   context.stroke();
 }
 
-function globeToPoint(points) {
-  return points.map(function(point) {
-    return canvasMap.getProjection().fromLatLngToPoint(point);
-  });
+function globeToPoint(point) {
+		return (canvasMap.getProjection()).fromLatLngToPoint(new google.maps.LatLng(point.lat(), point.lng()));
 }
 
 function recalibrateShift(points, minX, minY) {  

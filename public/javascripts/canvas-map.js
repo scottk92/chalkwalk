@@ -29,11 +29,11 @@ function initializeCanvasMap(fb, mapId) {
 // Everytime coordinates are added, draw a line.
 function recordCoordinates(fb) {
   fb.child('coords').on('child_added', function(snapshot) {
-    var data = snapshot.val();
-    console.log(data.stopped);
+    var data = snapshot.val();console.log(data);
     var user = data.name;
     if (!data.stopped) {
-      var newCoords = new google.maps.LatLng(data.lat, data.lng);
+      
+	  var newCoords = new google.maps.LatLng(data.lat, data.lng);
       if (userCoords[user] == undefined) {
         // First coordinate that the user pushed
         userCoords[user] = [];
@@ -52,7 +52,7 @@ function recordCoordinates(fb) {
       // User pressed the stop button, so create a new empty array
       userCoords[user].push([]);
     }
-	if (!(data[name] in colorCoords)) {
+	if (!(user in colorCoords)) {
 		colorCoords[user] = data.color;
 	}
   });
@@ -80,3 +80,4 @@ function stopDrawing(fb) {
 function recenter() {
   canvasMap.setCenter(center);
 }
+

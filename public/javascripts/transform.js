@@ -66,7 +66,8 @@ Transform.prototype.manageMultiTouch = function(event) {
     this.elemImage.style.webkitTransform = transform;
 
     this.elemImage.style.transformOrigin = "50% 50%";
-    this.elemImage.webkitTransformOrigin = "50% 50%";}
+    this.elemImage.webkitTransformOrigin = "50% 50%";
+}
 
 Transform.prototype.startListening = function() {
 	var obj = this;
@@ -74,3 +75,8 @@ Transform.prototype.startListening = function() {
 		obj.manageMultiTouch(event);
 	});	
 }
+
+Transform.prototype.stopListening = function() {
+	this.hammertime(this.touchArea).off("touch drag dragend transform transformend rotate");
+}
+

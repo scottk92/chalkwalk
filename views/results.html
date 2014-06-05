@@ -24,7 +24,6 @@
   <body>
     <h1 class="text-center" id="header">Adjust your image!</h1>
     <div class="text-center">
-		<button id="restart-game-btn" type="button" class="btn cwButton btn-lg">Play Again</button>
 		<button id="scale-done" type="button" class="btn cwButton btn-lg">Done</button>
 	</div>
       
@@ -55,19 +54,21 @@
     <script>  
       // Initialize
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
-      var drawing = document.getElementById("drawnImage");
-      
+      var drawing = document.getElementById("drawnImage");   
 	  fb.child('drawnImage').on('value', function(dataSnapshot) {
         console.log(document.body.childNodes);console.log(dataSnapshot.val());drawing.src = dataSnapshot.val();
 		var drawingImage = new Transform('outer', 'inner');
 		drawingImage.startListening();
+		var anotherGame = document.createElement('button');
+		anotherGame.setAttribute('id', 'restart-game-btn');
 		document.getElementById("scale-done").addEventListener("click", function() {
-			document.getElementById('scale-done').parentNode.removeChild(document.getElementById('scale-done'));
+			document.getElementById('scale-done').parentNode.innerHTML = "<button id=\"restart-game-btn\" type=\"button\" class=\"btn cwButton btn-lg\" onclick=\"restartGame()\">Play Again</button>";
 			document.getElementById('header').innerHTML = "Your result!";
 			document.getElementsByClassName('rangeslider')[0].parentNode.removeChild(document.getElementsByClassName('rangeslider')[0]);
 			document.getElementById('originalImage').parentNode.removeChild(document.getElementById('originalImage'));
-			document.getElementById('drawnImage').style.opacity = 1;
-			document.getElementById('outer').setAttribute('id', 'outer2');
+			document.getElementById('drawnImage').style.opacity = 0.99;
+			document.getElementById('inner').style.opacity = 0.99;
+			drawingImage.stopListening();
 		});
 	});
 
@@ -76,11 +77,6 @@
 
       // Transformation
       changeOpacity("opacrange", "inner");
-
-      // Restart button
-      document.getElementById("restart-game-btn").addEventListener("click", function(){
-        restartGame();
-      });
     </script>
   </body>
 </html>

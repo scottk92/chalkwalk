@@ -10,7 +10,6 @@
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="javascripts/fake_coords.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,10 +82,10 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 1000, function(){
-		      var image = createResultsPage(userCoords, colorCoords);
-          fb.child('drawnImage').set(image.toDataURL());
-          window.location = '/results';
+        var timer = new Counter('timer', 1000, function(){console.log(userCoords);console.log(colorCoords);
+		    var image = createResultsPage(userCoords, colorCoords);
+			fb.child('drawnImage').set(image.toDataURL());
+			window.location = '/results';
         });
         initializeEndGame(timer);
 

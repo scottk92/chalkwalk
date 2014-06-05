@@ -2,33 +2,40 @@ var createResultsPage = function(coordHash, colorHash) {
 	//create canvas
 	var image = createDrawing();
 	
-	var nameList = Object.keys(coordHash);console.log(coordHash);
+	var nameList = Object.keys(coordHash);console.log(nameList);
+	var newCoordHash = {};
 	for (var i = 0; i < nameList.length; i++) {
-		for (var j = 0; j < coordHash[nameList[i]].length; j++) {
-			coordHash[nameList[i]][j] = globeToPoint(coordHash[nameList[i]][j]);
-		}
+		newCoordHash[nameList[i]] = [];
+	for (var j = 0; j < coordHash[nameList[i]].length; j++) {
+		var newArray = [];
+	for (var h = 0; h < coordHash[nameList[i]][j].length; h++) {console.log(coordHash[nameList[i]][j][h]);
+			var projectedCoord = (canvasMap.getProjection()).fromLatLngToPoint(
+			new google.maps.LatLng(coordHash[nameList[i]][j][h].lat(), coordHash[nameList[i]][j][h].lng()));console.log(projectedCoord);
+				newArray.push(projectedCoord);
+		}if (newArray.length != 0)
+		newCoordHash[nameList[i]].push(newArray);
 	}
 
-	var minX = totalMin('x', coordHash);
-	var minY = totalMin('y', coordHash);
-	for (name in coordHash) {
-		for (i = 0; i < coordHash[name].length; i++) {
-			coordHash[name][i] = recalibrateShift(coordHash[name][i], minX, minY);
+}  
+	var minX = totalMin('x', newCoordHash);
+	var minY = totalMin('y', newCoordHash);
+	for (name in newCoordHash) {
+		for (i = 0; i < newCoordHash[name].length; i++) {
+			newCoordHash[name][i] = recalibrateShift(newCoordHash[name][i], minX, minY);
 		}
 	}
-	var max = Math.max(totalMax('x', coordHash), totalMax('y', coordHash));
-	
+	var max = Math.max(totalMax('x', newCoordHash), totalMax('y', newCoordHash));
+
 	console.log(max);
 	for ( i = 0; i < nameList.length; i++) {
 		var player = nameList[i];
 		var color = colorHash[player];
-		var lines = coordHash[player];
+		var lines = newCoordHash[player];
 		for (var numLines = 0; numLines < lines.length; numLines++) {
 			var line = lines[numLines];
 			drawPoints(color, image, line, max);
 		}
-	}
-  return image;
+	}return image;
 }
 
 function totalMin(axis, coordHash) {
