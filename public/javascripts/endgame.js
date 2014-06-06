@@ -43,7 +43,7 @@ function initializeEndGame(timer) {
  */
 function reopenGame() {
 	var request = new XMLHttpRequest();
-	request.open('PUT', '/closegame/' + localStorage.game, true);
+	request.open('PUT', '/opengame/' + localStorage.game, true);
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			console.log("Game was made inactive!");
