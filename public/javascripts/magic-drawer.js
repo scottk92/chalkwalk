@@ -2,7 +2,7 @@
 var EARTH_RADIUS = 6370;
 var NUM_POINTS = 3;
 var THRESHOLD = 0.01;
-var DRAWING_TIMEOUT = 7000;
+var DRAWING_TIMEOUT = 2000;
 var VIBRATION_DURATION = 1000;
 
 var calibrate = 0;
