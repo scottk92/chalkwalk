@@ -7,8 +7,8 @@ router.get('/', function(req, res) {
 });
 
 // GET test page
-router.get('/test', function(req, res) {
-  res.render('test');
+router.get('/final', function(req, res) {
+  res.render('final');
 });
 
 // GET waiting room

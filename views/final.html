@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chalk Walk - Final</title>
+
+    <!-- Bootstrap -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      html { 
+        height: 100%; 
+      }
+      body { 
+        height: 100%; 
+        margin: 0; 
+        padding: 0 
+      }
+      #canvas-map { 
+        height: 100%; 
+      }
+      #waiting-msg, #countdown-container {
+        position: absolute;
+        width: 100%;
+        z-index: 101;
+        text-align: center;
+      }
+      #countdown-container, #restart-game-btn {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="countdown-container">
+      <button id="recenter-btn" type="button" class="btn btn-primary">Recenter</button>
+      <ul id="user-color-list">Drawers:</ul>
+    </div>
+    <div id="canvas-map"></div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/canvas-map.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        // Initialize
+        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
+
+        // Record a user's color on the guesser's page
+        function recordUserColor(username, color) {
+          var listItem = document.createElement("li");
+          listItem.innerHTML = username;
+          listItem.style.color = color;
+          document.getElementById("user-color-list").appendChild(listItem);
+        }
+
+        // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
+        var numDrawersReady = 0;
+        fb.child('drawers').on('child_added', function(snapshot) {
+          console.log("drawer added");
+          var data = snapshot.val();
+          recordUserColor(data.username, data.color);
+          numDrawersReady++;
+          if (numDrawersReady == localStorage.numDrawers) {
+            alert("Start guessing!!!");
+            document.getElementById('waiting-msg').style.display = 'none';
+            document.getElementById('countdown-container').style.display = 'block';
+          }
+        });
+
+        // Recenter button
+        document.getElementById("recenter-btn").addEventListener("click", function(){
+          recenter();
+        });
+
+        // Initialize the map and set up event listeners
+        initializeCanvasMap(fb, "canvas-map");
+      });
+    </script>
+  </body>
+</html>
