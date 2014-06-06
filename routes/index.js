@@ -40,7 +40,7 @@ router.get('/guesser', function(req, res) {
 router.get('/gamefinder/:name', function(req, res) {
 	var name = req.params.name;
 	var db = req.db;
-    db.collection('games').find({'name': name, 'round':round}).limit(1).toArray(function (err, items) {
+    db.collection('games').find({'name': name}).limit(1).toArray(function (err, items) {
     	res.json(items);
     });
 });
