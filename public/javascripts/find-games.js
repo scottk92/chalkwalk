@@ -76,7 +76,7 @@ GameFinder.prototype.displaySearchResults = function(data) {
 	button.type = "button";
 	button.className = "btn btn-primary";
 	button.addEventListener("click", function(){
-		gamefinder.joinGame(data.name, localStorage.username);
+		gamefinder.joinGame(data.name, data.round, localStorage.username);
 	});
 	buttonTd.appendChild(button);
 	row.appendChild(buttonTd);
@@ -88,7 +88,7 @@ GameFinder.prototype.displaySearchResults = function(data) {
  * Sends a PUT request to MongoDB to place a user inside a game.  Transitions
  * to the waiting room page.
  */
-GameFinder.prototype.joinGame = function(gameName, username) {
+GameFinder.prototype.joinGame = function(gameName, round, username) {
 	if (username == "" || username == undefined) {
 		this.displayErrorMsg("Please log in before joining a room.");
 		return;
@@ -98,7 +98,7 @@ GameFinder.prototype.joinGame = function(gameName, username) {
 	request.onload = function() {
 	  if (request.status >= 200 && request.status < 400){
 			localStorage.game = gameName;
-			localStorage.round = 1;
+			localStorage.round = round;
 			window.location = '/waiting_room';
 	  } else {
 	    console.log("Error");

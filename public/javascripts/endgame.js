@@ -57,6 +57,22 @@ function reopenGame() {
 	request.send();
 }
 
+function updateRound(nextRound) {
+	var request = new XMLHttpRequest();
+	request.open('PUT', '/updateRound/' + localStorage.game + '/' + nextRound, true);
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			console.log("Game was made inactive!");
+		} else {
+			console.log("error");
+		}
+	};
+	request.onerror = function() {
+		console.log("Request faild to send");
+	};
+	request.send();	
+}
+
 /*
  * Restart the game and advance to the next round.
  */
@@ -72,6 +88,7 @@ function restartGame() {
 
 	// Increment the round counter
 	var nextRound = parseInt(localStorage.round) + 1;
+	updateRound(nextRound);
 	localStorage.round = nextRound;
 
 	// Go back to the waiting room
