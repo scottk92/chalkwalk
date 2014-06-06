@@ -59,8 +59,10 @@ router.get('/logo', function(req, res) {
 router.post('/create/:gameName/:username', function(req, res) {
 	var gameName = req.params.gameName;
 	var username = req.params.username;
+	var round = 1;
+	console.log(round);
 	var db = req.db;
-	db.collection('games').insert({'name': gameName, 'users': [username], 'master': username, 'active':true, 'round':1}, function(err, result){
+	db.collection('games').insert({'name': gameName, 'users': [username], 'master': username, 'active':true, 'round':round}, function(err, result){
 		res.send(
             (err === null) ? { msg: '' } : { msg: err }
         );
