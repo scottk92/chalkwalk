@@ -47,6 +47,8 @@ function reopenGame() {
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			console.log("Game was made inactive!");
+			// Go back to the waiting room
+			window.location = '/waiting_room';
 		} else {
 			console.log("error");
 		}
@@ -63,6 +65,7 @@ function updateRound(nextRound) {
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			console.log("Game round was incremented");
+			reopenGame();
 		} else {
 			console.log("error");
 		}
@@ -77,9 +80,6 @@ function updateRound(nextRound) {
  * Restart the game and advance to the next round.
  */
 function restartGame() {
-	// Reopen the game for people to join
-	reopenGame();
-
 	// Clear all the necessary fields
 	localStorage.numDrawers = 0;
 	localStorage.removeItem('imageFile');
@@ -90,7 +90,4 @@ function restartGame() {
 	var nextRound = parseInt(localStorage.round) + 1;
 	updateRound(nextRound);
 	localStorage.round = nextRound;
-
-	// Go back to the waiting room
-	window.location = '/waiting_room';
 }
