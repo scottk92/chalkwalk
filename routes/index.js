@@ -90,4 +90,15 @@ router.put('/closegame/:gameName', function(req, res) {
 	});
 });
 
+// PUT Open a Game
+router.put('/opengame/:gameName', function(req, res) {
+	var gameName = req.params.gameName;
+	var db = req.db;
+	db.collection('games').update({'name': gameName}, {$set: { 'active': true }}, function(err, result){
+		res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+	});
+});
+
 module.exports = router;
