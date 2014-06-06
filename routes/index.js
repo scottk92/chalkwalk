@@ -105,6 +105,7 @@ router.put('/opengame/:gameName', function(req, res) {
 
 // PUT Change round
 router.put('/updateround/:gameName/:round', function(req, res) {
+	var gameName = req.params.gameName;
 	var round = req.params.round;
 	var db = req.db;
 	db.collection('games').update({'name': gameName}, {$set: { 'round': round }}, function(err, result){
