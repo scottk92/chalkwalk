@@ -62,7 +62,7 @@ function updateRound(nextRound) {
 	request.open('PUT', '/updateRound/' + localStorage.game + '/' + nextRound, true);
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-			console.log("Game was made inactive!");
+			console.log("Game round was incremented");
 		} else {
 			console.log("error");
 		}
