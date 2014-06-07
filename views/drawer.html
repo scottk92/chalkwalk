@@ -61,7 +61,7 @@
       #drawing-on, #drawing-off {display: none;}
 
 
-      #debug-coordinates {display: none}
+      #debug-coordinates {display: block}
     </style>
   </head>
   <body>
@@ -135,7 +135,7 @@
         initializeDrawing();
 
         // Stop scrolling so the wheel shows better
-        $('body').bind('touchmove', function(e){e.preventDefault()})
+        //$('body').bind('touchmove', function(e){e.preventDefault()})
       });
     </script>
   </body>
