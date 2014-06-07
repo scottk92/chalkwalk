@@ -15,7 +15,6 @@ var positionOptions = {
 var rawCoords = [];
 var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
-var drawingOffTimer;
 
 // Initialize vibration
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
@@ -107,15 +106,12 @@ function error(error) {
 
 // Control wheel interaction
 function initializeDrawing() {
-  Draggable.create("#knob", {type:"rotation", throwProps:false,
-    onDragStart:function(){
-      // Dragging causes drawing to turn on
-      toggleDraw(true);
-      if (drawingOffTimer != undefined) window.clearTimeout(drawingOffTimer);
-    }, 
-    onDragEnd:function(){
-      // Not dragging for 7 seconds causes drawing to turn off
-      drawingOffTimer = window.setTimeout(function(){toggleDraw(false)}, DRAWING_TIMEOUT);
-    }
+  document.getElementById("#knob").addEventListener("touchstart", function(){
+    alert("touch start");
+    toggleDraw(true);
+  });
+  document.getElementById("#knob").addEventListener("touchend", function(){
+    alert("touch end");
+    toggleDraw(false)
   });
 }
