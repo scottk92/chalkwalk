@@ -15,6 +15,7 @@ var positionOptions = {
 var rawCoords = [];
 var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
+var drawingOffTimer;
 
 // Initialize vibration
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
@@ -22,7 +23,6 @@ navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mo
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
   if (isDrawing) { // Only push coordinates if isDrawing is turned on
-    //alert("pos obtained");
     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
     
     // Debugging...
@@ -84,8 +84,7 @@ function toggleDraw(on) {
     isDrawing = true;
     calibrate = 0;
     if (watch == undefined) {
-      //console.log("creating new watch");
-      //alert("watch created");
+      console.log("creating new watch");
       watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
     }
     document.getElementById("drawing-on").style.display = 'block';
@@ -108,12 +107,15 @@ function error(error) {
 
 // Control wheel interaction
 function initializeDrawing() {
-  document.getElementById("knob").addEventListener("touchstart", function(){
-    //alert("touch start");
-    toggleDraw(true);
-  });
-  document.getElementById("knob").addEventListener("touchend", function(){
-    //alert("touch end");
-    toggleDraw(false)
+  Draggable.create("#knob", {type:"rotation", throwProps:false,
+    onDragStart:function(){
+      // Dragging causes drawing to turn on
+      toggleDraw(true);
+      if (drawingOffTimer != undefined) window.clearTimeout(drawingOffTimer);
+    }, 
+    onDragEnd:function(){
+      // Not dragging for 7 seconds causes drawing to turn off
+      drawingOffTimer = window.setTimeout(function(){toggleDraw(false)}, DRAWING_TIMEOUT);
+    }
   });
 }

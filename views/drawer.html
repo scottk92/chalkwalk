@@ -7,8 +7,9 @@
     <title>Chalk Walk - Draw</title>
 
     <!-- Include the compiled Ratchet CSS and custom CSS-->
-    <link href="stylesheets/custom_ui.css" rel="stylesheet">	
-		
+    <!--link href="stylesheets/ratchet.min.css" rel="stylesheet"-->
+    <link href="stylesheets/custom_ui.css" rel="stylesheet">  
+
     <!-- Bootstrap -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
@@ -50,18 +51,12 @@
         margin-top:5%;
         width: 100%;
       }
-      #knob {
-        width: 75%;
-        height:200px;
-        margin-left:auto;
-        margin-right:auto;
-      }
+      #knob {width: 75%;}
       #drawing-on {color:green;}
       #drawing-off {color:red;}
       #drawing-on, #drawing-off {display: none;}
 
-
-      #debug-coordinates {display: block}
+      #debug-coordinates {display: none}
     </style>
   </head>
   <body>
@@ -91,7 +86,7 @@
       <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button-->
       <h1 id="drawing-on">Drawing ON!</h1>
       <h1 id="drawing-off">Drawing OFF</h1>
-      <button id="knob" type="button" class="btn btn-primary btn-lg btn-block">DRAW</button>
+      <img id="knob" src="http://www.greensock.com/draggable/img/knob_bg.jpg" alt="knob" />
     </div>
     <ol id="debug-coordinates">Coordinates</ol>
 
@@ -103,15 +98,15 @@
     <script src="javascripts/magic-drawer.js"></script>
     <script src="javascripts/counter.js"></script>
     <script src="javascripts/endgame.js"></script>
-    <!--script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script-->
-    <!--script src="javascripts/Draggable.min.js"></script-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="javascripts/Draggable.min.js"></script>
     <!--script src="javascripts/fake_coords.js"></script-->
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 180, function(){
+        var timer = new Counter('timer', 1000, function(){
           window.location = '/results';
         });
         initializeEndGame(timer);
@@ -135,7 +130,7 @@
         initializeDrawing();
 
         // Stop scrolling so the wheel shows better
-        //$('body').bind('touchmove', function(e){e.preventDefault()})
+        $('body').bind('touchmove', function(e){e.preventDefault()})
       });
     </script>
   </body>
