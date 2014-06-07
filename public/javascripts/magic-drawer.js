@@ -22,6 +22,7 @@ navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mo
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
   if (isDrawing) { // Only push coordinates if isDrawing is turned on
+    alert("pos obtained");
     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
     
     // Debugging...
@@ -84,6 +85,7 @@ function toggleDraw(on) {
     calibrate = 0;
     if (watch == undefined) {
       console.log("creating new watch");
+      alert("watch created");
       watch = navigator.geolocation.watchPosition(setLocation, error, positionOptions);
     }
     document.getElementById("drawing-on").style.display = 'block';
