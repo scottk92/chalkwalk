@@ -48,7 +48,7 @@
       document.addEventListener('DOMContentLoaded', function(){
         // Constants
         var GOOD_GPS_THRESHOLD = 15;
-        var TOTAL_TIME = 10;
+        var TOTAL_TIME = 70;
 
         // Control the progress bar
         var timePassed = 0;
@@ -67,10 +67,10 @@
           localStorage.callibrate = count >= GOOD_GPS_THRESHOLD;
           var alertMessage = document.getElementById("alert-message");
           if (count >= GOOD_GPS_THRESHOLD) { 
-            alertMessage.innerHTML = "Nice, your GPS is pretty strong. It receives " + count + " per minute.";
+            alertMessage.innerHTML = "Nice, your GPS is pretty strong. It receives approximately " + count + " per minute.";
             alertMessage.className = alertMessage.className + " alert-success";
           } else {
-            alertMessage.innerHTML = "Yikes, your GPS isn't too good. It only receives " + count + " per minute. You may want to consider turning on your GPS, Wifi, or switching to a different mobile browser or device.";
+            alertMessage.innerHTML = "Yikes, your GPS isn't too good. It only receives approximately " + count + " per minute. You may want to consider turning on your GPS, Wifi, or switching to a different mobile browser or device.";
             alertMessage.className = alertMessage.className + " alert-warning";
           }
           document.getElementById("results-summary-container").style.display = 'block';
