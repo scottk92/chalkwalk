@@ -7,6 +7,11 @@ router.get('/', function(req, res) {
 });
 
 // GET test page
+router.get('/test', function(req, res) {
+  res.render('test');
+});
+
+// GET final page
 router.get('/final', function(req, res) {
   res.render('final');
 });
