@@ -107,11 +107,11 @@ function error(error) {
 // Control wheel interaction
 function initializeDrawing() {
   document.getElementById("knob").addEventListener("touchstart", function(){
-    alert("touch start");
+    //alert("touch start");
     toggleDraw(true);
   });
   document.getElementById("knob").addEventListener("touchend", function(){
-    alert("touch end");
+    //alert("touch end");
     toggleDraw(false)
   });
 }
