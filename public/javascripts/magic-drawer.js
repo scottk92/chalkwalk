@@ -33,7 +33,6 @@ function setLocation(position) {
 		listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
 		document.getElementById("debug-coordinates").appendChild(listItem);
 		rawCoords.push(position);
-		alert('coord ' + totalCoords + ' : ' + pos.lat() + " " + pos.lng());
 		if (totalCoords > 6 && isClose(pos)) {
 			if (localStorage.callibrate == "true") {
 				// Weighted average algorithm to refine the coordinates
@@ -42,26 +41,25 @@ function setLocation(position) {
 				if (calibrate % NUM_POINTS == 0) {
 					var calibratedPos = calibratedLoc();
 					calibrateCoords.push(calibratedPos);
-					alert('push');coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
+					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
 				}
 			} else {
 				// Don't bother callibrating it
-				alert('push');coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
+				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
 			}
 		}
 	}
 }
 	
 function isClose(position) {
-	var numFar = 0;alert('isclose?' + rawCoords.length);
+	var numFar = 0;//alert('isclose?' + rawCoords.length);
 	for (var i = 0; i < Math.min(5, rawCoords.length-1); i++) {
 		var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].coords.latitude,
 			rawCoords[rawCoords.length - 2 - i].coords.longitude);
-		alert(hDist(position, pos));
 			if (hDist(position, pos) >= THRESHOLD) {
 			numFar++;
 		}
-	}alert(numFar);
+	}
 	return (numFar <= 1);
 }
 
