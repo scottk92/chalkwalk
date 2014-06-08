@@ -17,33 +17,39 @@ var calibrateCoords = [];
 var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round + '/coords');
 var drawingOffTimer;
 
+
+var totalCoords = 0;
+
 // Initialize vibration
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
-  if (isDrawing) { // Only push coordinates if isDrawing is turned on
-    var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
+	++totalCoords;
+	if (isDrawing) { // Only push coordinates if isDrawing is turned on
+		var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
     
-    // Debugging...
-    var listItem = document.createElement("li");
-    listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
-    document.getElementById("debug-coordinates").appendChild(listItem);
+		// Debugging...
+		var listItem = document.createElement("li");
+		listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
+		document.getElementById("debug-coordinates").appendChild(listItem);
 
-    if (localStorage.callibrate == "true") {
-      // Weighted average algorithm to refine the coordinates
-      rawCoords.push(position);
-      calibrate++;
-      if (calibrate % NUM_POINTS == 0) {
-        var calibratedPos = calibratedLoc();
-        calibrateCoords.push(calibratedPos);
-        coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
-      }
-    } else {
-      // Don't bother callibrating it
-      coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
-    }
-  }
+		if (totalCoords > 6) {
+			if (localStorage.callibrate == "true") {
+				// Weighted average algorithm to refine the coordinates
+				rawCoords.push(position);
+				calibrate++;
+				if (calibrate % NUM_POINTS == 0) {
+					var calibratedPos = calibratedLoc();
+					calibrateCoords.push(calibratedPos);
+					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
+				}
+			} else {
+				// Don't bother callibrating it
+				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
+			}
+		}
+	}
 }
 
 // Uses weighted average algorithm to calibrate location

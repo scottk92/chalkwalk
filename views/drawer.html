@@ -100,15 +100,14 @@
     <script src="javascripts/endgame.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <script src="javascripts/Draggable.min.js"></script>
+	<script src="javascripts/create_timer.js"></script>
     <!--script src="javascripts/fake_coords.js"></script-->
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 1000, function(){
-          window.location = '/results';
-        });
+        
         initializeEndGame(timer);
         
         // Enter the drawing room and send Firebase an event
