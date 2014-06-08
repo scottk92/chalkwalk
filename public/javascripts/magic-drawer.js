@@ -25,7 +25,7 @@ navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mo
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
 	totalCoords++;
-	if (isDrawing) { // Only push coordinates if isDrawing is turned on
+	alert(totalCoords);if (isDrawing) { // Only push coordinates if isDrawing is turned on
 		var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
 			
 		// Debugging...
@@ -33,7 +33,7 @@ function setLocation(position) {
 		listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
 		document.getElementById("debug-coordinates").appendChild(listItem);
 		rawCoords.push(position);
-		if (totalCoords > 6 && isClose(pos)) {
+		if (totalCoords > 6) {
 			if (localStorage.callibrate == "true") {
 				// Weighted average algorithm to refine the coordinates
 		
