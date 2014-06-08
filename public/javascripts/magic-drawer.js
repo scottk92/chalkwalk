@@ -55,7 +55,8 @@ function setLocation(position) {
 function isClose(position) {
 	var numFar = 0;
 	for (var i = 0; i < Math.min(5, rawCoords.length-1); i++) {
-		if (hDist(position, rawCoords[rawCoords.length - 2 - i]) >= THRESHOLD) {
+		alert(hDist(position, rawCoords[rawCoords.length - 2 - i]));
+			if (hDist(position, rawCoords[rawCoords.length - 2 - i]) >= THRESHOLD) {
 			alert(hDist(position, rawCoords[rawCoords.length - 2 - i]));
 			numFar++;
 		}
