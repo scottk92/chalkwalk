@@ -132,7 +132,13 @@
 
       document.addEventListener('DOMContentLoaded', function(){
         // Skip directly to search if the user has already entered his or her name
-        if (localStorage.username != undefined) showPanel(SEARCH_PANEL);
+        if (localStorage.username != undefined && localStorage.username != "") {
+			var usernameDisplays = document.getElementsByClassName("username-display");
+            Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
+              usernameDisplay.innerHTML = localStorage.username;
+            });
+			showPanel(SEARCH_PANEL);
+		}
 
         // Control the username panel
         document.getElementById("name-submit-btn").addEventListener("click", function(){
