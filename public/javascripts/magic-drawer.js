@@ -34,7 +34,7 @@ function setLocation(position) {
 		document.getElementById("debug-coordinates").appendChild(listItem);
 		rawCoords.push(position);
 		alert('coord ' + totalCoords + ' : ' + pos.lat() + " " + pos.lng());
-		if (totalCoords > 6 && isClose(position)) {
+		if (totalCoords > 6 && isClose(pos)) {
 			if (localStorage.callibrate == "true") {
 				// Weighted average algorithm to refine the coordinates
 		
