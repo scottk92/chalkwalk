@@ -123,9 +123,11 @@
         var radioBtns = document.getElementsByClassName("roleRadioButton");
         Array.prototype.filter.call(radioBtns, function(radioBtn){
           radioBtn.addEventListener("click", function(){
-            localStorage.role = this.value;
-            fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
-            colorBox.showOptions(this.value == 'Drawer');
+			if (this.value != localStorage.role) {
+				localStorage.role = this.value;
+				fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
+				colorBox.showOptions(this.value == 'Drawer');
+			}
           });
         });
 
@@ -150,7 +152,7 @@
         // Listen to role changes.  userRoleMap maps username to DOM td element.
         fb.child('roleChanges').on('child_added', function(snapshot){
           var change = snapshot.val();
-		  alert(change);
+		  alert(userRoleMap[change.name].innerHTML);
           userRoleMap[change.name].innerHTML = change.role;
 		  alert(userRoleMap[change.name].innerHTML);
           if (change.role == 'Drawer') {
