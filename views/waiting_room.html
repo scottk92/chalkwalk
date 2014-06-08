@@ -125,7 +125,7 @@
           radioBtn.addEventListener("click", function(){
             localStorage.role = this.value;
 			alert(localStorage.role);
-            fb.child('roleChanges').push({name:localStorage.username, role:localStorage.value});
+            fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
             colorBox.showOptions(this.value == 'Drawer');
           });
         });
