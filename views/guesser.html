@@ -79,12 +79,17 @@
     <script src="javascripts/endgame.js"></script>
     <!--create timer-->
 	<script src="javascripts/create_timer.js"></script>
-    <script>
+	<script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         
+		var timer = new Counter('timer', 1000, function(){
+			var image = createResultsPage(userCoords, colorCoords);
+			fb.child('drawnImage').set(image.toDataURL());
+			window.location = '/results';
+        });
         initializeEndGame(timer);
 
         // Record a user's color on the guesser's page
@@ -98,7 +103,7 @@
         // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
         fb.child('drawers').on('child_added', function(snapshot) {
           var data = snapshot.val();
-          recordUserColor(data.username, data.color);
+          console.log(localStorage.numDrawers);recordUserColor(data.username, data.color);
           numDrawersReady++;
           if (numDrawersReady == localStorage.numDrawers) {
             alert("Start guessing!!!");

@@ -95,20 +95,26 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!--script src="javascripts/ratchet.min.js"></script-->
     <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/canvas-map.js"></script>
     <script src="javascripts/magic-drawer.js"></script>
     <script src="javascripts/counter.js"></script>
+    <script src="javascripts/screenshot.js"></script>
+    <script src="javascripts/create_results.js"></script>
     <script src="javascripts/endgame.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <script src="javascripts/Draggable.min.js"></script>
 	<script src="javascripts/create_timer.js"></script>
-    <!--script src="javascripts/fake_coords.js"></script-->
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        
-        initializeEndGame(timer);
+        var timerGame =  new Counter('timer', 1000, function(){
+			var image = createResultsPage(userCoords, colorCoords);
+			fb.child('drawnImage').set(image.toDataURL());
+			window.location = '/results';
+        });
+		 initializeEndGame(timerGame);
         
         // Enter the drawing room and send Firebase an event
         fb.child('drawers').push({username:localStorage.username, color:localStorage.color});
@@ -116,12 +122,13 @@
         // Listen to drawers coming into the drawing room and start the game when everybody is in the drawing room
         fb.child('drawers').on('child_added', function(snapshot) {
           numDrawersReady++;
+		  console.log(numDrawersReady);
           if (numDrawersReady == localStorage.numDrawers) {
             alert("Start drawing!!!");
             document.getElementById('waiting-msg').style.display = 'none';
             document.getElementById('paintbrush-container').style.display = 'block';
             document.getElementById('countdown-container').style.display = 'block';
-            timer.countdown();
+            timerGame.countdown();
           }
         });
 

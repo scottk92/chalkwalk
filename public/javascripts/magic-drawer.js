@@ -1,7 +1,7 @@
 // Constants
 var EARTH_RADIUS = 6370;
 var NUM_POINTS = 3;
-var THRESHOLD = 0.01;
+var THRESHOLD = 0.05;
 var DRAWING_TIMEOUT = 2000;
 var VIBRATION_DURATION = 1000;
 
@@ -19,25 +19,24 @@ var drawingOffTimer;
 
 
 var totalCoords = 0;
-
 // Initialize vibration
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
-	++totalCoords;
+	totalCoords++;
 	if (isDrawing) { // Only push coordinates if isDrawing is turned on
 		var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
-    
+			
 		// Debugging...
 		var listItem = document.createElement("li");
 		listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
 		document.getElementById("debug-coordinates").appendChild(listItem);
-
-		if (totalCoords > 6) {
+		rawCoords.push(position);
+		if (totalCoords > 6 && isClose(pos)) {
 			if (localStorage.callibrate == "true") {
 				// Weighted average algorithm to refine the coordinates
-				rawCoords.push(position);
+		
 				calibrate++;
 				if (calibrate % NUM_POINTS == 0) {
 					var calibratedPos = calibratedLoc();
@@ -50,6 +49,16 @@ function setLocation(position) {
 			}
 		}
 	}
+}
+	
+function isClose(position) {
+	var numFar = 0;
+	for (var i = 0; i < Math.min(5, rawCoords.length); i++) {
+		if (hDist(position, rawCoords[rawCoords.length - 1 - i]) >= THRESHOLD) {
+			numFar++;
+		}
+	}
+	return (numFar <= 1);
 }
 
 // Uses weighted average algorithm to calibrate location
