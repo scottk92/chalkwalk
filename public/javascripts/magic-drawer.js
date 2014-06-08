@@ -25,7 +25,7 @@ navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mo
 // Calibrates coordinates and then pushes them to the Firebase DB
 function setLocation(position) {
 	totalCoords++;
-	alert(totalCoords);if (isDrawing) { // Only push coordinates if isDrawing is turned on
+	if (isDrawing) { // Only push coordinates if isDrawing is turned on
 		var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
 			
 		// Debugging...
@@ -33,7 +33,7 @@ function setLocation(position) {
 		listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
 		document.getElementById("debug-coordinates").appendChild(listItem);
 		rawCoords.push(position);
-		if (totalCoords > 6) {
+		if (totalCoords > 6 && isClose()) {
 			if (localStorage.callibrate == "true") {
 				// Weighted average algorithm to refine the coordinates
 		
@@ -41,11 +41,11 @@ function setLocation(position) {
 				if (calibrate % NUM_POINTS == 0) {
 					var calibratedPos = calibratedLoc();
 					calibrateCoords.push(calibratedPos);
-					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
+					alert('push');coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
 				}
 			} else {
 				// Don't bother callibrating it
-				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
+				alert('push');coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
 			}
 		}
 	}
@@ -55,9 +55,10 @@ function isClose(position) {
 	var numFar = 0;
 	for (var i = 0; i < Math.min(5, rawCoords.length); i++) {
 		if (hDist(position, rawCoords[rawCoords.length - 1 - i]) >= THRESHOLD) {
+			alert(hDist(position, rawCoords[rawCoords.length - 1 - i]));
 			numFar++;
 		}
-	}
+	}alert(numFar);
 	return (numFar <= 1);
 }
 
