@@ -10,7 +10,7 @@ var isDrawing = false;
 var positionOptions = {
   maximumAge: 0,
   enableHighAccuracy: true,
-  timeout: 5000
+  timeout: 10000
 };
 var rawCoords = [];
 var calibrateCoords = [];
@@ -55,7 +55,8 @@ function setLocation(position) {
 function isClose(position) {
 	var numFar = 0;alert('isclose?' + rawCoords.length);
 	for (var i = 0; i < Math.min(5, rawCoords.length-1); i++) {
-			var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].position.latitude,
+		alert(rawCoords[rawCoords.length - 2- i].position.longitude);
+		var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].position.latitude,
 			rawCoords[rawCoords.length - 2 - i].position.longitude);
 		alert(hDist(position, pos));
 			if (hDist(position, pos) >= THRESHOLD) {
