@@ -55,8 +55,6 @@ function setLocation(position) {
 function isClose(position) {
 	var numFar = 0;alert('isclose?' + rawCoords.length);
 	for (var i = 0; i < Math.min(5, rawCoords.length-1); i++) {
-	alert('pppp');
-		alert(rawCoords[rawCoords.length - 2- i].position.longitude);
 		var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].coords.latitude,
 			rawCoords[rawCoords.length - 2 - i].coords.longitude);
 		alert(hDist(position, pos));
