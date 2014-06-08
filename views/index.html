@@ -37,9 +37,10 @@
         display: inline;
       }
     </style>
-  </head>
-    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+  
+   <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
 
+  </head>
   <body>
 	<script> 
 		var currentTime = new Date();
@@ -189,6 +190,8 @@
           if (e.keyCode == 13) {
             e.preventDefault();
             activeButton.click();
+			//Hides Keyboard
+			document.activeElement.blur();
           }
         });
       });
