@@ -40,7 +40,7 @@ GameFinder.prototype.search = function() {
 			if (data_array.length == 0 || !data_array[0].active) {
 				gamefinder.displayErrorMsg("There are no games with that name.");
 			} else {
-				gamefinder.displaySearchResults(data_array[0]);
+				gamefinder.displaySearchResults(data_array[0]);console.log(data_array[0]);
 			}
 		} else {
 			console.log("error");
@@ -93,6 +93,16 @@ GameFinder.prototype.joinGame = function(gameName, round, username) {
 		this.displayErrorMsg("Please log in before joining a room.");
 		return;
 	}
+	var obj = this;
+	var userExists = false;
+        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + gameName + '/' + round + '/users');
+        fb.on('child_added', function (dataSnapshot) {
+			if (dataSnapshot.val().name === username) {
+				obj.displayErrorMsg("Username " + username + " already exists in this game.");
+				userExists = true;
+			}
+		});
+		if (userExists) return;
 	request = new XMLHttpRequest();
 	request.open('PUT', '/join/' + gameName + "/" + username, true);
 	request.onload = function() {

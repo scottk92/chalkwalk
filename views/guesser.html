@@ -77,16 +77,14 @@
     <script src="javascripts/counter.js"></script>
     <script src="javascripts/create_results.js"></script>
     <script src="javascripts/endgame.js"></script>
+    <!--create timer-->
+	<script src="javascripts/create_timer.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-        var timer = new Counter('timer', 180, function(){console.log(userCoords);console.log(colorCoords);
-		    var image = createResultsPage(userCoords, colorCoords);
-			fb.child('drawnImage').set(image.toDataURL());
-			window.location = '/results';
-        });
+        
         initializeEndGame(timer);
 
         // Record a user's color on the guesser's page
