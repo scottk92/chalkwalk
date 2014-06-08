@@ -55,9 +55,10 @@ function setLocation(position) {
 function isClose(position) {
 	var numFar = 0;alert('isclose?' + rawCoords.length);
 	for (var i = 0; i < Math.min(5, rawCoords.length-1); i++) {
-		alert(hDist(position, rawCoords[rawCoords.length - 2 - i]));
-			if (hDist(position, rawCoords[rawCoords.length - 2 - i]) >= THRESHOLD) {
-			alert(hDist(position, rawCoords[rawCoords.length - 2 - i]));
+			var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].position.latitude,
+			rawCoords[rawCoords.length - 2 - i].position.longitude);
+		alert(hDist(position, pos));
+			if (hDist(position, pos) >= THRESHOLD) {
 			numFar++;
 		}
 	}alert(numFar);
