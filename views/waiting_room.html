@@ -152,8 +152,8 @@
         fb.child('roleChanges').on('child_added', function(snapshot){
           var change = snapshot.val();
 		  //alert(userRoleMap[change.name].innerHTML);
-		  //setTimeout( function() {userRoleMap[change.name] = "bug"; }, 50 );
-          userRoleMap[change.name].innerHTML = "bug";
+		  Window.setTimeout( function() {userRoleMap[change.name] = "bug"; }, 50 );
+          //userRoleMap[change.name].innerHTML = change.role();
 		  //alert(userRoleMap[change.name].innerHTML);
           if (change.role == 'Drawer') {
             roleCounter.Drawer++;
