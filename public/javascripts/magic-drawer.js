@@ -33,7 +33,7 @@ function setLocation(position) {
 		listItem.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
 		document.getElementById("debug-coordinates").appendChild(listItem);
 		rawCoords.push(position);
-		if (totalCoords > 6 && isClose()) {
+		if (totalCoords > 6 && isClose(position)) {
 			if (localStorage.callibrate == "true") {
 				// Weighted average algorithm to refine the coordinates
 		
@@ -54,8 +54,8 @@ function setLocation(position) {
 function isClose(position) {
 	var numFar = 0;
 	for (var i = 0; i < Math.min(5, rawCoords.length); i++) {
-		if (hDist(position, rawCoords[rawCoords.length - 1 - i]) >= THRESHOLD) {
-			alert(hDist(position, rawCoords[rawCoords.length - 1 - i]));
+		if (hDist(position, rawCoords[rawCoords.length - 2 - i]) >= THRESHOLD) {
+			alert(hDist(position, rawCoords[rawCoords.length - 2 - i]));
 			numFar++;
 		}
 	}alert(numFar);
