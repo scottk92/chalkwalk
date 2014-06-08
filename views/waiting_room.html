@@ -153,7 +153,7 @@
           var change = snapshot.val();
 		  //alert(userRoleMap[change.name].innerHTML);
 		  //Window.setTimeout( function() {userRoleMap[change.name] = "bug"; }, 50 );
-          userRoleMap[change.name].innerHTML = change.role();
+          userRoleMap[change.name].innerHTML = change.role;
 		  //alert(userRoleMap[change.name].innerHTML);
           if (change.role == 'Drawer') {
             roleCounter.Drawer++;
