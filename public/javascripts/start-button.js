@@ -20,8 +20,8 @@ StartButton.prototype.implementButton = function () {
 	this.button.style.display = 'block';
 	this.button.addEventListener("click", function(){
 		if (startButton.roleCounter.Drawer < 1 || startButton.roleCounter.Guesser < 1) {
-			alert(startButton.roleCounter.Drawer);
-			alert(startButton.roleCounter.Guesser);
+			//alert(startButton.roleCounter.Drawer);
+			//alert(startButton.roleCounter.Guesser);
 			alert("You must have at least 1 Drawer and 1 Guesser!");
 			return;
 		}
