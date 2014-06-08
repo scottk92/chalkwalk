@@ -142,6 +142,7 @@
           var data = snapshot.val();
           if (data.role == 'Drawer') roleCounter.Drawer--;
           else roleCounter.Guesser--;
+		  alert(userRoleMap[data.username].parentNode);
           userRoleMap[data.username].parentNode.remove();
           delete userRoleMap[data.username];
         });
@@ -149,6 +150,7 @@
         // Listen to role changes.  userRoleMap maps username to DOM td element.
         fb.child('roleChanges').on('child_added', function(snapshot){
           var change = snapshot.val();
+		  alert(change);
           userRoleMap[change.name].innerHTML = change.role;
 		  alert(userRoleMap[change.name].innerHTML);
           if (change.role == 'Drawer') {
