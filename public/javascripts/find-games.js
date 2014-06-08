@@ -94,15 +94,6 @@ GameFinder.prototype.joinGame = function(gameName, round, username) {
 		return;
 	}
 	var obj = this;
-	var userExists = false;
-        var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + gameName + '/' + round + '/users');
-        fb.on('child_added', function (dataSnapshot) {
-			if (dataSnapshot.val().name === username) {
-				obj.displayErrorMsg("Username " + username + " already exists in this game.");
-				userExists = true;
-			}
-		});
-		if (userExists) return;
 	request = new XMLHttpRequest();
 	request.open('PUT', '/join/' + gameName + "/" + username, true);
 	request.onload = function() {
