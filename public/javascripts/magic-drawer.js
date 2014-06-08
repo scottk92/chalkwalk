@@ -57,8 +57,8 @@ function isClose(position) {
 	for (var i = 0; i < Math.min(5, rawCoords.length-1); i++) {
 	alert('pppp');
 		alert(rawCoords[rawCoords.length - 2- i].position.longitude);
-		var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].position.latitude,
-			rawCoords[rawCoords.length - 2 - i].position.longitude);
+		var pos = new google.maps.LatLng(rawCoords[rawCoords.length - 2 - i].coords.latitude,
+			rawCoords[rawCoords.length - 2 - i].coords.longitude);
 		alert(hDist(position, pos));
 			if (hDist(position, pos) >= THRESHOLD) {
 			numFar++;
