@@ -7,6 +7,7 @@
     <title>Chalk Walk - Guess</title>
 
     <!-- Bootstrap -->
+	<link href="stylesheets/custom_ui.css" rel="stylesheet"> 
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -33,6 +34,7 @@
         width: 100%;
         z-index: 101;
         text-align: center;
+		word-wrap:break-word;
       }
       #countdown-container, #restart-game-btn {
         display: none;
@@ -51,19 +53,19 @@
             Are you sure you want to end the game?<br>
             <div id="modal-buttons-container" class="text-center">
               <button id="continue-game-btn" type="button" class="btn btn-default btn-lg" data-dismiss="modal">No, continue playing</button>
-              <button id="end-game-btn" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Yes, show me my results.</button>
+              <button id="end-game-btn" type="button" class="btn cwButton btn-lg" data-dismiss="modal">Yes, show me my results.</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <h1 id="waiting-msg">Waiting for everyone to enter the room...</h1>
+    <h1 id="waiting-msg cwTextAlign">Waiting for everyone to enter the room...</h1>
     <div id="countdown-container">
       <h1 id="timer">0:00</h1>
-      <button id="show-modal-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">End Game</button>
-      <button id="recenter-btn" type="button" class="btn btn-primary">Recenter</button>
-      <button id="restart-game-btn" type="button" class="btn btn-primary btn-lg">Play Another Round</button>
+      <button id="show-modal-btn" type="button" class="btn cwButton-neg" data-toggle="modal" data-target="#myModal">End Game</button>
+      <button id="recenter-btn" type="button" class="btn cwButton">Recenter</button>
+      <button id="restart-game-btn" type="button" class="btn cwButton btn-lg">Play Another Round</button>
       <ul id="user-color-list">Drawers:</ul>
     </div>
     <div id="canvas-map"></div>
