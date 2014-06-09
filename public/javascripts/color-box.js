@@ -7,8 +7,11 @@ var colorLibrary = [
 	'#492D61' // navy
 ];
 
+var containId;
+
 function ColorBox(containerId) {
 	this.container = document.getElementById(containerId);
+	containId = containerId;
 }
 
 /*
@@ -28,7 +31,7 @@ function turnOffColorOptions(onColorBox) {
  * Toggle the display of the color options (guessers don't need colors).
  */
 ColorBox.prototype.showOptions = function (show) {
-	if (!show) this.container.style.display = 'none';
+	if (!show) document.getElementById(containId).style.display = 'none';
 	//if (show) this.container.style.display = 'block';
 	//else this.container.style.display = 'none';
 }
