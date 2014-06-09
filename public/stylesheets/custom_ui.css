@@ -1,3 +1,36 @@
+.bar {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  height: 44px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.bar-nav {
+  top: 0;
+}
+
+.title {
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 -10px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 44px;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .cwBanner {
 	background: linear-gradient(#C2EFF2, #42C6CF 85%);
 	border-bottom: 3px solid #B1DDE0;
