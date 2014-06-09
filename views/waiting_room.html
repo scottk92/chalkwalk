@@ -112,20 +112,16 @@
           localStorage.waiting = true;
           localStorage.role = 'Drawer';
         }
-
-        function updateRoleChange() {
-			if (this.value != localStorage.role) {
-				colorBox.showOptions(this.value == 'Drawer');
-				localStorage.role = this.value;
-				fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
-			}
-		}		
 		
 		// Push role changes to Firebase.
 		var radioBtns = document.getElementsByClassName("roleRadioButton");
         Array.prototype.filter.call(radioBtns, function(radioBtn){
           radioBtn.addEventListener("click", function(){
-			updateRoleChange();
+			if (this.value != localStorage.role) {
+				colorBox.showOptions(this.value == 'Drawer');
+				localStorage.role = this.value;
+				fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
+			}
           });
         });
 
