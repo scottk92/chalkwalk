@@ -97,5 +97,5 @@ function toggleDraw() {
 }
 
 function error(error) {
-  alert(error);
+  //alert(error);
 }
