@@ -97,8 +97,7 @@
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var userRoleMap = {};
       var roleCounter = {Drawer:0, Guesser:0};
-	  var radioBtns = document.getElementsByClassName("roleRadioButton");
-	  radioBtns.value = "Drawer";
+	  
 	  
 
       document.addEventListener('DOMContentLoaded', function(){
@@ -114,14 +113,19 @@
           localStorage.role = 'Drawer';
         }
 
-        // Push role changes to Firebase.
-        Array.prototype.filter.call(radioBtns, function(radioBtn){
-          radioBtn.addEventListener("click", function(){
+        function updateRoleChange() {
 			if (this.value != localStorage.role) {
 				colorBox.showOptions(this.value == 'Drawer');
 				localStorage.role = this.value;
 				fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
 			}
+		}		
+		
+		// Push role changes to Firebase.
+		var radioBtns = document.getElementsByClassName("roleRadioButton");
+        Array.prototype.filter.call(radioBtns, function(radioBtn){
+          radioBtn.addEventListener("click", function(){
+			updateRoleChange();
           });
         });
 
