@@ -97,6 +97,9 @@
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var userRoleMap = {};
       var roleCounter = {Drawer:0, Guesser:0};
+	  var radioBtns = document.getElementsByClassName("roleRadioButton");
+	  radioBtns.value = "Drawer";
+	  
 
       document.addEventListener('DOMContentLoaded', function(){
         document.getElementById("game-name-header").innerHTML = localStorage.game + " Round " + localStorage.round;
@@ -112,7 +115,6 @@
         }
 
         // Push role changes to Firebase.
-        var radioBtns = document.getElementsByClassName("roleRadioButton");
         Array.prototype.filter.call(radioBtns, function(radioBtn){
           radioBtn.addEventListener("click", function(){
 			if (this.value != localStorage.role) {
