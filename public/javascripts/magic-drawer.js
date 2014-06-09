@@ -106,6 +106,7 @@ function toggleDraw(on) {
     }
     document.getElementById("drawing-on").style.display = 'block';
     document.getElementById("drawing-off").style.display = 'none';
+	document.getElementById("instructions").style.display = 'none';
   } else {
     // Turn OFF drawing
     isDrawing = false;
