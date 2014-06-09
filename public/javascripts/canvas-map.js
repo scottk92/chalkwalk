@@ -5,7 +5,7 @@ var center;
 
 // Load the map and set up event listener for drawing on the map
 function initializeCanvasMap(fb, mapId) {
-  navigator.geolocation.getCurrentPosition(function(position) {
+  fb.child('startLocation').on('value', function(snapshot) {
     var styles = [
       {
         stylers: [
@@ -14,10 +14,9 @@ function initializeCanvasMap(fb, mapId) {
         ]
       }
     ];
-    center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    var mapOptions = {
+	var mapOptions = {
       zoom: 18,
-      center: center,
+      center: snapshot.val(),
       disableDefaultUI: true,
     };
     canvasMap = new google.maps.Map(document.getElementById(mapId), mapOptions);
