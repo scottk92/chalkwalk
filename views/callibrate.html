@@ -8,6 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+	<link href="stylesheets/custom_ui.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,15 +26,15 @@
     </style>
   </head>
   <body>
-    <h1>Measuring GPS strength...</h1>
+    <h1 class="cwTextAlign">Measuring GPS strength...</h1>
     <div class="progress progress-striped active">
-      <div id="time-bar" class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50">
+      <div id="time-bar" class="progress-bar cwProgress" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50">
         <span class="sr-only">Time bar</span>
       </div>
     </div>
     <div id="results-summary-container">
       <div id="alert-message" class="alert"></div>
-      <button id="redirect-btn" type="button" class="btn btn-primary btn-lg btn-block">Continue to Chalkwalk</button>
+      <button id="redirect-btn" type="button" class="btn cwButton btn-lg btn-block">Continue to Chalkwalk</button>
     </div>
     <p>Coordinates received: 
       <span id="num-coordinates" class="badge">0</span>

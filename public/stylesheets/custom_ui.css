@@ -3,6 +3,15 @@
 	border-bottom: 3px solid #B1DDE0;
 }
 
+.cwProgress{
+	background-color: #42C6CF;
+}
+
+.cwTextAlign{
+	width: 100%;
+	text-align: center;
+}
+
 .cwTitle {
 	color: white;
 }
