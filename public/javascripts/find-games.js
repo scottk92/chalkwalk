@@ -121,7 +121,6 @@ GameFinder.prototype.createHeaderRow = function() {
 	var header1 = document.createElement("th");
 	header1.innerHTML = "Game Name";
 	var header2 = document.createElement("th");
-	header2.className += "cwButton";
 	header2.innerHTML = "Join";
 	headRow.appendChild(header1);
 	headRow.appendChild(header2);
