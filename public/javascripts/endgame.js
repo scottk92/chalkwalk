@@ -21,9 +21,7 @@ function initializeEndGame(timer) {
 	});
 
 	// Restart game
-	document.getElementById("restart-game-btn").addEventListener("click", function(){
-		restartGame();
-	});
+	document.getElementById("restart-game-btn").addEventListener("click", restartGame);
 
 	// Listen for when another player ends the game
   fb.child('end').on('child_added', function(snapshot) {
@@ -80,6 +78,9 @@ function updateRound(nextRound) {
  * Restart the game and advance to the next round.
  */
 function restartGame() {
+	//Remove Event listener to avoid double click
+	document.getElementById("restart-game-btn").removeEventListener("click", restartGame);
+	
 	// Clear all the necessary fields
 	localStorage.numDrawers = 0;
 	localStorage.removeItem('imageFile');
