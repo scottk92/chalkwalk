@@ -32,6 +32,7 @@ function turnOffColorOptions(onColorBox) {
  */
 ColorBox.prototype.showOptions = function (show) {
 	if (!show) document.getElementById(containId).style.display = 'none';
+	else this.container.style.display = 'block';
 	//if (show) this.container.style.display = 'block';
 	//else this.container.style.display = 'none';
 }
