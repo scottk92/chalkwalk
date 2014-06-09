@@ -78,6 +78,9 @@ function updateRound(nextRound) {
  * Restart the game and advance to the next round.
  */
 function restartGame() {
+	//Remove Event listener to avoid double click
+	document.getElementById("restart-game-btn").removeEventListener("click", restartGame);
+	
 	// Clear all the necessary fields
 	localStorage.numDrawers = 0;
 	localStorage.removeItem('imageFile');
