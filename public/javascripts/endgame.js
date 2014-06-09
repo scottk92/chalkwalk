@@ -21,9 +21,7 @@ function initializeEndGame(timer) {
 	});
 
 	// Restart game
-	document.getElementById("restart-game-btn").addEventListener("click", function(){
-		restartGame();
-	});
+	document.getElementById("restart-game-btn").addEventListener("click", restartGame);
 
 	// Listen for when another player ends the game
   fb.child('end').on('child_added', function(snapshot) {
