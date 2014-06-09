@@ -28,7 +28,8 @@ function turnOffColorOptions(onColorBox) {
  * Toggle the display of the color options (guessers don't need colors).
  */
 ColorBox.prototype.showOptions = function (show) {
-	if (show) this.container.style.display = 'block';
+	if (!show) this.container.style.display = 'none';
+	//if (show) this.container.style.display = 'block';
 	//else this.container.style.display = 'none';
 }
 
