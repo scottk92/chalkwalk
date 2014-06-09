@@ -125,7 +125,7 @@
           radioBtn.addEventListener("click", function(){
 			if (this.value != localStorage.role) {
 				localStorage.role = this.value;
-				colorBox.showOptions(this.value == 'Drawer');
+				//colorBox.showOptions(this.value == 'Drawer');
 				fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
 			}
           });
@@ -162,8 +162,8 @@
 		   userRoleMap[change.name].innerHTML = change.role;
 		   
 		  //Hack to redraw role table so role updates for user
-		  userRoleMap[change.name].parentNode.parentNode.style.display = 'none';
-		  userRoleMap[change.name].parentNode.parentNode.style.display = 'block';
+		  //userRoleMap[change.name].parentNode.parentNode.style.display = 'none';
+		  //userRoleMap[change.name].parentNode.parentNode.style.display = 'block';
 		
 		  
         });
