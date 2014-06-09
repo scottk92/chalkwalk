@@ -151,11 +151,6 @@
         // Listen to role changes.  userRoleMap maps username to DOM td element.
         fb.child('roleChanges').on('child_added', function(snapshot){
           var change = snapshot.val();
-         
-		  //Hack to redraw role table so role updates for user
-		  //userRoleMap[change.name].parentNode.style.display = 'none';
-		  //userRoleMap[change.name].parentNode.style.display = 'block';
-		
           if (change.role == 'Drawer') {
             roleCounter.Drawer++;
             roleCounter.Guesser--;
@@ -165,6 +160,11 @@
           }
 		  
 		   userRoleMap[change.name].innerHTML = change.role;
+		   
+		  //Hack to redraw role table so role updates for user
+		  userRoleMap[change.name].parentNode.parentNode.style.display = 'none';
+		  userRoleMap[change.name].parentNode.parentNode.style.display = 'block';
+		
 		  
         });
 
