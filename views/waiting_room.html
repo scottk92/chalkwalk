@@ -124,8 +124,8 @@
         Array.prototype.filter.call(radioBtns, function(radioBtn){
           radioBtn.addEventListener("click", function(){
 			if (this.value != localStorage.role) {
+				colorBox.showOptions(this.value == 'Drawer');
 				localStorage.role = this.value;
-				//colorBox.showOptions(this.value == 'Drawer');
 				fb.child('roleChanges').push({name:localStorage.username, role:localStorage.role});
 			}
           });
