@@ -87,9 +87,10 @@
         var numDrawersReady = 0;
         
 		var timer = new Counter('timer', 1000, function(){
-			var image = createResultsPage(userCoords, colorCoords);
+			/*var image = createResultsPage(userCoords, colorCoords);
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
-			window.location = '/results';}, 4000);
+			window.location = '/results';}, 4000);*/
+			window.location = '/results';
         });
         initializeEndGame(timer);
 
