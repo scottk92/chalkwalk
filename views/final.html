@@ -88,6 +88,8 @@
         // Initialize the map and set up event listeners
         initializeCanvasMap(fb, "canvas-map");
       });
+	  window.setTimeout(function() {document.body.innerHTML = ""; 
+	  document.body.appendChild(createResultsPage(userCoords , colorCoords))},5000);
     </script>
   </body>
 </html>
