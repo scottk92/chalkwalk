@@ -109,6 +109,7 @@
             alert("Start guessing!!!");
             document.getElementById('waiting-msg').style.display = 'none';
             document.getElementById('countdown-container').style.display = 'block';
+      initializeCanvasMap(fb, "canvas-map");
             timer.countdown();
           }
         });
@@ -118,9 +119,7 @@
           recenter();
         });
 
-        // Initialize the map and set up event listeners
-        initializeCanvasMap(fb, "canvas-map");
-      });
+       });
     </script>
   </body>
 </html>
