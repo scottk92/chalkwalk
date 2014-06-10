@@ -58,13 +58,16 @@
 	<div class="content">
 		<!-- Username Panel -->
 		<div id="name-panel">
+			<div class="cwTextAlign">
+				<img src="/images/user.png" class="imgWidth"/>
+			</div>
 		  <h2 class="cwTextAlign">What is your name?</h2>
 		  <form role="form">
 			<div class="form-group">
 			  <label class="sr-only" for="nameInput">Name</label>
 			  <input id="nameInput" type="text" class="form-control user-input" placeholder="Your Name">
 			</div>
-			<button id="name-submit-btn" type="button" class="btn cwButton btn-lg">Submit</button>
+			<button id="name-submit-btn" type="button" class="btn cwButton btn-lg btn-block">Submit</button>
 		  </form>
 		</div>
 
@@ -78,7 +81,7 @@
 			  <label class="sr-only" for="gameNameQueryInput">Game Name</label>
 			  <input id="gameNameQueryInput" type="text" class="form-control user-input" placeholder="Enter Game name">
 			</div>
-			<button id="game-search-btn" type="button" class="btn cwButton btn-lg">Search</button>
+			<button id="game-search-btn" type="button" class="btn cwButton btn-lg btn-block">Search</button>
 			<!--<button id="go-to-create" type="button" class="btn btn-link">or Create a Game</button>-->
 		  </form>
 		  <table id="search-results-table" class="table table-striped">
@@ -101,12 +104,12 @@
 			  <label class="sr-only" for="createGameNameInput">Game Name</label>
 			  <input id="createGameNameInput" type="text" class="form-control user-input" placeholder="Enter Game name">
 			</div>
-			<button id="game-create-btn" type="button" class="btn cwButton btn-lg">Create</button>
+			<button id="game-create-btn" type="button" class="btn cwButton btn-lg btn-block">Create</button>
 			<!--<button id="go-to-search" type="button" class="btn btn-link">or Search for a Game</button>-->
 		  </form>
 		</div>
 		
-	</div>
+	<div>
 	<div id="find-toggle">
 	<nav class="bar bar-tab">
 		<a id="go-to-search" class="tab-item active" href="#">
