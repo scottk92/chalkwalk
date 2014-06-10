@@ -5,7 +5,7 @@ var center;
 
 // Load the map and set up event listener for drawing on the map
 function initializeCanvasMap(fb, mapId) {
-  fb.child('startLocation').on('value', function(snapshot) {
+  fb.child('startLocation').once('child_added', function(snapshot) {
     var styles = [
       {
         stylers: [
