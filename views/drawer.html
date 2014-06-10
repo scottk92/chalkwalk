@@ -115,7 +115,7 @@
 			fb.child('drawnImage').push(image.toDataURL());
 			localStorage.drawnImage = image.toDataURL();var elt = document.createElement("img");elt.setAttribute('id', 'drawnImage');elt.setAttribute('src', image.toDataURL());document.body.appendChild(elt);
 			fb.child('drawnImage').once('child_added', function(snapshot) {
-				window.location = '/results';
+				//window.location = '/results';
 			});
         });
 		 initializeEndGame(timerGame);
