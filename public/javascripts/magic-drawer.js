@@ -22,7 +22,7 @@ var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + local
       var count = 0;
 	
 	function loc(position) {
-	alert('loc');
+	
 	fb.child('startLocation').push({lat:position.latitude, lng:position.longitude});
 	};
 var totalCoords = 0;
@@ -50,7 +50,6 @@ function setLocation(position) {
 					calibrateCoords.push(calibratedPos);
 					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
 					if (totalCoords >7) {
-					alert(calibratedPos);
 					loc({latitude:calibratedPos.lat(), longitude:calibratedPos.lng()});
 					}
 				}
@@ -58,7 +57,7 @@ function setLocation(position) {
 				// Don't bother callibrating it
 				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
 			if (totalCoords>7) {
-alert(pos);					loc({latitude:pos.lat(), longitude:pos.lng()});
+loc({latitude:pos.lat(), longitude:pos.lng()});
 					}}
 		}
 	}

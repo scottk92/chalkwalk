@@ -91,9 +91,7 @@
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
 			window.location = '/results';}, 4000);*/
 			    var timer =  new Counter('timer', 1000, function(){
-			console.log(userCoords);var image = createResultsPage(userCoords, colorCoords);
-			fb.child('drawnImage').push(image.toDataURL());
-			fb.child('drawnImage').on('child_added', function(snapshot) {
+			console.log(userCoords);fb.child('drawnImage').on('child_added', function(snapshot) {
 				window.location = '/results';
 			});
         });
