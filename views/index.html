@@ -182,9 +182,13 @@
 			});
         });
         document.getElementById("go-to-create").addEventListener("click", function(){
+			document.getElementById("go-to-search").className = document.getElementById("go-to-search").className.replace(" active", "");
+			document.getElementById("go-to-create").className += " active";
           showPanel(CREATE_PANEL, "nameBtn", "find-toggle");
         });
         document.getElementById("go-to-search").addEventListener("click", function(){
+			document.getElementById("go-to-create").className = document.getElementById("go-to-create").className.replace(" active", "");
+			document.getElementById("go-to-search").className += " active";
           showPanel(SEARCH_PANEL, "nameBtn", "find-toggle");
         });
 
