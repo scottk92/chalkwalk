@@ -51,7 +51,7 @@
   </head>
   <body>
 		<header class="bar cwBanner bar-nav fixed">
-			<h1 class="title cwTitle">Start a Game</h1>
+			<h1 id="round-name" class="title cwTitle"></h1>
 		</header>
 		
 		<div class="content">
@@ -103,7 +103,8 @@
 	  
 
       document.addEventListener('DOMContentLoaded', function(){
-        document.getElementById("game-name-header").innerHTML = localStorage.game + " Round " + localStorage.round;
+        document.getElementById("game-name-header").innerHTML = localStorage.game;
+		document.getElementById("round-name").innerHTML = " Round " + localStorage.round;
         var colorBox = new ColorBox("color-options");
         colorBox.createColorOptions();
 
