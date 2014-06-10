@@ -1,6 +1,6 @@
 /* Creates Header Bar */
 .bar {
-  position: fixed;
+  /*position: absolute;*/
   right: 0;
   left: 0;
   z-index: 10;
@@ -17,9 +17,9 @@
 	border-bottom: 3px solid #B1DDE0;
 }
 
-.kb-hide.bar {
+/*.kb-hide.bar {
 	position: absolute;
-}
+}*/
 
 .bar-nav {
   top: 0;
