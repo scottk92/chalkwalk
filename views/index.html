@@ -33,10 +33,7 @@
         margin-top: 3%;
         width: 100%;
       }
-      .username-display, .go-to-name {
-		margin-left: 2%;
-        display: inline;
-      }
+
     </style>
 	
 	<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
@@ -51,12 +48,10 @@
 		} 
 	</script>
 	
-	<header class="bar cwBanner">
-		<button id="nameBtn" class="btn pull-left">
-			name
-		</button>
+	<div class="bar cwBanner">
 		<h1 class="title cwTitle">Start a Game</h1>
-    </header>
+		<button type="button" id="nameBtn" class="btn pull-left go-to-name">Name</button>
+    </div>
 	
 	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 		<!-- Username Panel -->
@@ -74,7 +69,6 @@
 		<!-- Search for Game Panel -->
 		<div id="search-game-panel">
 		  <h5 class="username-display"></h5>
-		  <button type="button" class="btn btn-link go-to-name">Change username</button>
 		  <h2 class="cwTextAlign">Search for a Game</h2>
 		  <form role="form">
 			<div class="form-group">
@@ -83,7 +77,7 @@
 			  <input id="gameNameQueryInput" type="text" class="form-control user-input" placeholder="Enter Game name">
 			</div>
 			<button id="game-search-btn" type="button" class="btn cwButton btn-lg btn-block">Search</button>
-			<button id="go-to-create" type="button" class="btn btn-link">or Create a Game</button>
+			<!--<button id="go-to-create" type="button" class="btn btn-link">or Create a Game</button>-->
 		  </form>
 		  <table id="search-results-table" class="table table-striped">
 			<tbody id="search-results-tbody">
@@ -98,7 +92,6 @@
 		<!-- Create Game Panel -->
 		<div id="create-game-panel">
 		  <h5 class="username-display"></h5>
-		  <button type="button" class="btn btn-link go-to-name">Change username</button>
 		  <h2 class="cwTextAlign">Create a Game</h2>
 		  <form role="form">
 			<div class="form-group">
@@ -107,10 +100,21 @@
 			  <input id="createGameNameInput" type="text" class="form-control user-input" placeholder="Enter Game name">
 			</div>
 			<button id="game-create-btn" type="button" class="btn cwButton btn-lg btn-block">Create</button>
-			<button id="go-to-search" type="button" class="btn btn-link">or Search for a Game</button>
+			<!--<button id="go-to-search" type="button" class="btn btn-link">or Search for a Game</button>-->
 		  </form>
 		</div>
-		
+	<div id="find-toggle">
+	<nav class="bar bar-tab">
+		<a id="go-to-search" class="tab-item active" href="#">
+			<span class="icon icon-search"></span>
+			<span class="tab-label">Search</span>
+		</a>
+		<a id="go-to-create" class="tab-item" href="#">
+			<span class="icon icon-plus"></span>
+			<span class="tab-label">Create</span>
+		</a>
+	</nav>
+	</div>
 	
 	<!-- Include the compiled Ratchet JS -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -139,9 +143,9 @@
         if (localStorage.username != undefined && localStorage.username != "") {
 			var usernameDisplays = document.getElementsByClassName("username-display");
             Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
-              usernameDisplay.innerHTML = localStorage.username;
+              usernameDisplay.innerHTML = "Welcome " + localStorage.username;
             });
-			showPanel(SEARCH_PANEL);
+			showPanel(SEARCH_PANEL, "nameBtn", "find-toggle");
 		}
 
         // Control the username panel
@@ -151,10 +155,10 @@
           else {
             var usernameDisplays = document.getElementsByClassName("username-display");
             Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
-              usernameDisplay.innerHTML = username;
+              usernameDisplay.innerHTML = "Welcome " + username;
             });
             localStorage.username = username;
-            showPanel(SEARCH_PANEL);
+            showPanel(SEARCH_PANEL, "nameBtn", "find-toggle");
           }
         });
 
@@ -173,15 +177,15 @@
         // Control transitions
         var backButtons = document.getElementsByClassName("go-to-name");
         Array.prototype.filter.call(backButtons, function(backButton){
-          backButton.addEventListener("click", function(){
-            showPanel(NAME_PANEL);
-          });
+			backButton.addEventListener("click", function(){
+				showPanel(NAME_PANEL, "nameBtn", "find-toggle");
+			});
         });
         document.getElementById("go-to-create").addEventListener("click", function(){
-          showPanel(CREATE_PANEL);
+          showPanel(CREATE_PANEL, "nameBtn", "find-toggle");
         });
         document.getElementById("go-to-search").addEventListener("click", function(){
-          showPanel(SEARCH_PANEL);
+          showPanel(SEARCH_PANEL, "nameBtn", "find-toggle");
         });
 
         // Fix the enter button bug
