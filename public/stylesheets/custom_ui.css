@@ -1,3 +1,7 @@
+html, body {
+	height: 100%;
+}
+
 /* Creates Header Bar */
 .bar {
   right: 0;
