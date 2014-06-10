@@ -111,10 +111,9 @@
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
         var timerGame =  new Counter('timer', 1000, function(){
-			var image = createResultsPage(userCoords, colorCoords);
-			fb.child('drawnImage').push("junk");
-			localStorage.userCoords = JSON.stringify(toPlane(userCoords,colorCoords));localStorage.colorCoords = JSON.stringify(colorCoords);
-			fb.child('drawnImage').once('child_added', function(snapshot) {
+			
+			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
+			console.log(colorCoords);console.log(userCoords);fb.child('drawnImage').push("junk");fb.child('drawnImage').once('child_added', function(snapshot) {
 				window.location = '/results';
 			});
         });
