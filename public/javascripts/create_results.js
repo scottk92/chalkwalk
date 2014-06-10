@@ -1,4 +1,4 @@
-var toPlane = function(coordHash, colorHash) {
+function toPlane(coordHash, colorHash) {
 	//create canvas
 	
 	var nameList = Object.keys(coordHash);console.log(nameList);
