@@ -58,7 +58,7 @@ function setLocation(position) {
 				// Don't bother callibrating it
 				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
 			if (totalCoords ==7) {
-					loc({latitude:pos.lat(), longitude:pos.lng()});
+alert(pos);					loc({latitude:pos.lat(), longitude:pos.lng()});
 					}}
 		}
 	}
