@@ -49,7 +49,7 @@ function setLocation(position) {
 					var calibratedPos = calibratedLoc();
 					calibrateCoords.push(calibratedPos);
 					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
-					if (totalCoords ==7) {
+					if (totalCoords >7) {
 					alert(calibratedPos);
 					loc({latitude:calibratedPos.lat(), longitude:calibratedPos.lng()});
 					}
@@ -57,7 +57,7 @@ function setLocation(position) {
 			} else {
 				// Don't bother callibrating it
 				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
-			if (totalCoords ==7) {
+			if (totalCoords>7) {
 alert(pos);					loc({latitude:pos.lat(), longitude:pos.lng()});
 					}}
 		}
