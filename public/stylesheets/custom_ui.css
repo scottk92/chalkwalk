@@ -74,6 +74,17 @@ nav {
 	color: white;
 }
 
+.imgWidth {
+ width: 33%;
+}
+
+.pull-right {
+  float: right;
+  background-color: #FFAD17;
+	border: solid medium white;
+	color: white;
+}
+
 .bar .btn-nav.pull-left.icon-left-nav {
 	margin-right: -3px;
 	
@@ -146,6 +157,9 @@ nav {
 }
 
 .cwButton {
+	font-family: 'Open Sans', sans-serif;
+	display: inline-block;
+	text-align: center;
 	color: white;
 	background-color: #3ACFC0;
 	border: 1px solid #00A3A3;
@@ -166,15 +180,15 @@ nav {
 }
 
 .cwButton-neg {
-	color: white;
-	background-color: #D05D86;
-	border: 1px solid #D05D86;
+	color: black;
+	background-color: #FFAD17;;
+	border: 1px solid #d2b48c;
 }
 
 .cwButton-neg:active, .cwButton-neg.active {
 	color: black;
-	background-color: #FFE1D1;
-	border: 1px solid #C8D7DE;
+	background-color: #d2b48c;
+	border: 1px solid #FFAD17;
 }
 
 .content{
