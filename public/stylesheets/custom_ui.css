@@ -26,8 +26,36 @@
 	position: fixed;
 }
 
+/*Moves content down for fixed bar-nav*/
 .bar-nav ~ .content {
   padding-top: 44px;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px 7px;
+  margin-bottom: 0;
+  margin-top: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.pull-left {
+  float: left;
+}
+
+.bar .btn-nav.pull-left.icon-left-nav {
+	margin-right: -3px;
 }
 
 .title {
@@ -43,7 +71,6 @@
   text-align: center;
   white-space: nowrap;
 }
-
 
 
 /* Changes Progress bar Color: Aquamarine */
@@ -106,5 +133,27 @@
 
 .logoBG {
 	background-color: rgba(177, 221, 224, 0.2);
+}
+
+@font-face {
+  font-family: Ratchicons;
+  font-style: normal;
+  font-weight: normal;
+
+  src: url("../fonts/ratchicons.eot");
+  src: url("../fonts/ratchicons.eot?#iefix") format("embedded-opentype"), url("../fonts/ratchicons.woff") format("woff"), url("../fonts/ratchicons.ttf") format("truetype"), url("../fonts/ratchicons.svg#svgFontName") format("svg");
+}
+.icon {
+  display: inline-block;
+  font-family: Ratchicons;
+  font-size: 24px;
+  line-height: 1;
+  text-decoration: none;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-left-nav:before {
+	content: '\e82d';
 }
 
