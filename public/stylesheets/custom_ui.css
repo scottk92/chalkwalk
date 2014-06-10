@@ -16,9 +16,18 @@
 	border-bottom: 3px solid #B1DDE0;
 }
 
-.bar.fixed {
-	position: fixed;
+/* Attaches Bar to top*/
+.bar-nav {
 	top: 0;
+}
+
+/* Fixes position of header to top */
+.bar-nav.fixed {
+	position: fixed;
+}
+
+.bar-nav ~ .content {
+  padding-top: 44px;
 }
 
 .title {
