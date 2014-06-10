@@ -89,6 +89,7 @@
       <h1 id="drawing-off">Drawing OFF</h1>
       <img id="knob" src="/images/turner.png" alt="knob" />
     </div>
+	<div style="display:none" id="map" />
     <ol id="debug-coordinates">Coordinates</ol>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -110,7 +111,7 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
-		recordCoordinates(fb, true);
+		initializeCanvasMap(fb,"map");
         var timerGame =  new Counter('timer', 1000, function(){
 			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
 			alert(localStorage.userCoords);console.log(colorCoords);console.log(userCoords);
