@@ -70,7 +70,6 @@
 		<!-- Search for Game Panel -->
 		<div id="search-game-panel">
 		  <h5 class="username-display"></h5>
-		  <button type="button" class="btn btn-link go-to-name">Change username</button>
 		  <h2 class="cwTextAlign">Search for a Game</h2>
 		  <form role="form">
 			<div class="form-group">
@@ -94,7 +93,6 @@
 		<!-- Create Game Panel -->
 		<div id="create-game-panel">
 		  <h5 class="username-display"></h5>
-		  <button type="button" class="btn btn-link go-to-name">Change username</button>
 		  <h2 class="cwTextAlign">Create a Game</h2>
 		  <form role="form">
 			<div class="form-group">
@@ -135,7 +133,7 @@
         if (localStorage.username != undefined && localStorage.username != "") {
 			var usernameDisplays = document.getElementsByClassName("username-display");
             Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
-              usernameDisplay.innerHTML = localStorage.username;
+              usernameDisplay.innerHTML = "Welcome" + localStorage.username;
             });
 			showPanel(SEARCH_PANEL);
 		}
