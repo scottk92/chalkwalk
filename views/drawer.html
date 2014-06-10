@@ -81,7 +81,6 @@
       <button id="show-modal-btn" type="button" class="btn cwButton-neg" data-toggle="modal" data-target="#myModal">End Game</button>
       <button id="restart-game-btn" type="button" class="btn cwButton btn-lg">Play Another Round</button>
     </div>
-	<div id="map" style="display:none"/>
     <div id="paintbrush-container">
       <!--img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
       <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button-->
@@ -110,7 +109,7 @@
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
-        canvasMap = new google.maps.Map(document.getElementById('map'), {zoom:18, center:{lat:37.428993, lng:-122.180554}});
+        canvasMap = new google.maps.Map(document.createElement('div'), {zoom:18, center:{lat:37.428993, lng:-122.180554}});
 		var numDrawersReady = 0;
 		recordCoordinates(fb, true);
         var timerGame =  new Counter('timer', 1000, function(){
