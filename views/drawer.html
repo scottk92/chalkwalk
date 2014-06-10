@@ -113,8 +113,8 @@
         var timerGame =  new Counter('timer', 1000, function(){
 			
 			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
-			console.log(colorCoords);console.log(userCoords);fb.child('drawnImage').once('child_added', function(snapshot) {
-				window.location = '/results';
+			console.log(colorCoords);console.log(userCoords);
+			window.location = '/results';
 			});
         });
 		 initializeEndGame(timerGame);
