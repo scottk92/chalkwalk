@@ -89,9 +89,10 @@
 		var timer = new Counter('timer', 1000, function(){
 			/*var image = createResultsPage(userCoords, colorCoords);
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
-			window.location = '/results';}, 4000);*/var elt = document.createElement("img");elt.setAttribute('id', 'drawnImage');elt.setAttribute('src', createResultsPage(userCoords, colorCoords).toDataURL());document.body.appendChild(elt);
+			window.location = '/results';}, 4000);*/
+			localStorage.userCoords = JSON.stringify(userCoords); localStorage.colorCoords = JSON.stringify(colorCoords); 
 			console.log(colorCoords);console.log(userCoords);fb.child('drawnImage').once('child_added', function(snapshot) {
-		//		window.location = '/results';
+				window.location = '/results';
 		});
 		});
         initializeEndGame(timer);
