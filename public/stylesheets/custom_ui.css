@@ -1,7 +1,4 @@
-body, html {
-	height: 100%;
-}
-
+/* Creates Header Bar */
 .bar {
   position: fixed;
   right: 0;
@@ -12,6 +9,16 @@ body, html {
   padding-left: 10px;
   background-color: white;
   border-bottom: 1px solid #ddd;
+}
+
+/* Changes Header Bar color: Aquamarine lined with green-blue */
+.bar.cwBanner {
+	background: linear-gradient(#C2EFF2, #42C6CF 85%);
+	border-bottom: 3px solid #B1DDE0;
+}
+
+.kb-hide.bar {
+	position: absolute;
 }
 
 .bar-nav {
@@ -32,11 +39,9 @@ body, html {
   white-space: nowrap;
 }
 
-.cwBanner {
-	background: linear-gradient(#C2EFF2, #42C6CF 85%);
-	border-bottom: 3px solid #B1DDE0;
-}
 
+
+/* Changes Progress bar Color: Aquamarine */
 .cwProgress{
 	background-color: #42C6CF;
 }
