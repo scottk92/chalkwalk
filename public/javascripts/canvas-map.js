@@ -21,12 +21,12 @@ function initializeCanvasMap(fb, mapId) {
     };
     canvasMap = new google.maps.Map(document.getElementById(mapId), mapOptions);
     canvasMap.setOptions({styles: styles});
-    recordCoordinates(fb);
+    recordCoordinates(fb, false);
   });
 }
 
 // Everytime coordinates are added, draw a line.
-function recordCoordinates(fb) {
+function recordCoordinates(fb, drawer) {
   fb.child('coords').on('child_added', function(snapshot) {
     var data = snapshot.val();console.log(data);
     var user = data.name;
@@ -41,8 +41,9 @@ function recordCoordinates(fb) {
         var activeLine = userCoords[user][userCoords[user].length-1];
         if (activeLine.length >= 1) { // guard against strange cases
           // Line drawn
+		  if (!drawer) {
           drawLine(activeLine[activeLine.length-1], newCoords, data.color);
-          console.log("Line drawn!");
+          }console.log("Line drawn!");
         }
         // Add to the current line
         activeLine.push(newCoords);

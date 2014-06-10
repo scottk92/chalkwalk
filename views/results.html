@@ -57,8 +57,7 @@
     <script>  
       // Initialize
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
-	  fb.child('drawnImage').once('child_added', function(dataSnapshot) {
-        console.log(document.body.childNodes);console.log(dataSnapshot.val());
+	  
 		document.getElementById('inner').appendChild(createResultsPage(JSON.parse(localStorage.userCoords), JSON.parse(localStorage.colorCoords)));
 		var drawingImage = new Transform('outer', 'inner');
 		drawingImage.startListening();
@@ -72,7 +71,7 @@
 			document.getElementById('drawnImage').style.opacity = 0.99;
 			document.getElementById('inner').style.opacity = 0.99;
 			drawingImage.stopListening();
-		});
+		
 	});
 
       // Original image
