@@ -113,7 +113,7 @@
         var timerGame =  new Counter('timer', 1000, function(){
 			var image = createResultsPage(userCoords, colorCoords);
 			fb.child('drawnImage').push(image.toDataURL());
-			localStorage.userCoords = JSON.stringify(userCoords);localStorage.colorCoords = JSON.stringify(colorCoords);
+			localStorage.userCoords = JSON.stringify(toPlane(userCoords,colorCoords));localStorage.colorCoords = JSON.stringify(colorCoords);
 			fb.child('drawnImage').once('child_added', function(snapshot) {
 				window.location = '/results';
 			});

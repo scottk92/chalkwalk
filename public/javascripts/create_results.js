@@ -1,6 +1,5 @@
-var createResultsPage = function(coordHash, colorHash) {
+var toPlane = function(coordHash, colorHash) {
 	//create canvas
-	var image = createDrawing();
 	
 	var nameList = Object.keys(coordHash);console.log(nameList);
 	var newCoordHash = {};
@@ -23,7 +22,12 @@ var createResultsPage = function(coordHash, colorHash) {
 		for (i = 0; i < newCoordHash[name].length; i++) {
 			newCoordHash[name][i] = recalibrateShift(newCoordHash[name][i], minX, minY);
 		}
+	}return newCoordHash;
 	}
+	function createResultsPage(newCoordHash, colorHash) 
+	var nameList = Object.keys(newCoordHash);
+	
+	var image = createDrawing();
 	var max = Math.max(totalMax('x', newCoordHash), totalMax('y', newCoordHash));
 
 	console.log(max);
