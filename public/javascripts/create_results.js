@@ -24,7 +24,7 @@ function toPlane(coordHash, colorHash) {
 		}
 	}return newCoordHash;
 	}
-	function createResultsPage(newCoordHash, colorHash) 
+	function createResultsPage(newCoordHash, colorHash){ 
 	var nameList = Object.keys(newCoordHash);
 	
 	var image = createDrawing();
