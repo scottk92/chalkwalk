@@ -91,7 +91,7 @@
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
 			window.location = '/results';}, 4000);*/
 			console.log(userCoords);fb.child('drawnImage').on('child_added', function(snapshot) {
-				window.location = '/results';
+		//		window.location = '/results';
 		});
 		});
         initializeEndGame(timer);
