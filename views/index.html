@@ -51,7 +51,6 @@
 	<div class="bar cwBanner">
 		<h1 class="title cwTitle">Start a Game</h1>
 		<button type="button" id="nameBtn" class="btn pull-left go-to-name">Name</button>
-		
     </div>
 	
 	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
@@ -133,7 +132,7 @@
         if (localStorage.username != undefined && localStorage.username != "") {
 			var usernameDisplays = document.getElementsByClassName("username-display");
             Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
-              usernameDisplay.innerHTML = "Welcome" + localStorage.username;
+              usernameDisplay.innerHTML = "Welcome " + localStorage.username;
             });
 			showPanel(SEARCH_PANEL);
 		}
