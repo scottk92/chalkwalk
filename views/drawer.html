@@ -110,6 +110,7 @@
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
         var numDrawersReady = 0;
+		recordCoordinates(fb);
         var timerGame =  new Counter('timer', 1000, function(){
 			
 			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
