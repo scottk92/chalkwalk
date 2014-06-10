@@ -91,10 +91,10 @@
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
 			window.location = '/results';}, 4000);*/
 			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
-			console.log(colorCoords);console.log(userCoords);fb.child('drawnImage').once('child_added', function(snapshot) {
-				window.location = '/results';
+			console.log(colorCoords);console.log(userCoords);
+			window.location = '/results';
 		});
-		});
+		
         initializeEndGame(timer);
 
         // Record a user's color on the guesser's page
@@ -123,8 +123,7 @@
         document.getElementById("recenter-btn").addEventListener("click", function(){
           recenter();
         });
-
-       });
+});
     </script>
   </body>
 </html>
