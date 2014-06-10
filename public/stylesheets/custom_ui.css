@@ -16,6 +16,10 @@
 	border-bottom: 3px solid #B1DDE0;
 }
 
+.bar.fixed {
+	position: fixed;
+}
+
 .title {
   position: absolute;
   display: block;
