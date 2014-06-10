@@ -90,9 +90,8 @@
 			/*var image = createResultsPage(userCoords, colorCoords);
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
 			window.location = '/results';}, 4000);*/
-			console.log(colorCoords);console.log(userCoords);fb.child('drawnImage').on('child_added', function(snapshot) {
-		//		window.location = '/results';
-		document.body.appendChild(createResultsPage(userCoords, colorCoords));
+			console.log(colorCoords);console.log(userCoords);fb.child('drawnImage').once('child_added', function(snapshot) {
+				window.location = '/results';
 		});
 		});
         initializeEndGame(timer);
