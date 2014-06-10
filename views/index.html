@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!--<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <title>Chalk Walk - Gameroom</title>
 
@@ -53,11 +52,10 @@
 	</script>
 	
 	<header class="bar cwBanner">
-      <!--<h1 class="title cwTitle">Start a Game</h1>-->
+      <h1 class="title cwTitle">Start a Game</h1>
     </header>
 	
 	<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-	<!--<div class="content logoBG">-->
 		<!-- Username Panel -->
 		<div id="name-panel">
 		  <h2 class="cwTextAlign">What is your name?</h2>
@@ -110,7 +108,6 @@
 		  </form>
 		</div>
 		
-	<!--</div>-->
 	
 	<!-- Include the compiled Ratchet JS -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -121,7 +118,6 @@
     <script src="javascripts/panel-transition.js"></script>
     <script src="javascripts/find-games.js"></script>
     <script src="javascripts/create-games.js"></script>
-	<!--<script src="javascripts/nav-bar.js"></script>-->
     <script>
       // Refresh everything
 	 if (localStorage.callibrate == undefined) window.location = '/callibrate';
@@ -134,8 +130,6 @@
       var NAME_PANEL = 0;
       var SEARCH_PANEL = 1;
       var CREATE_PANEL = 2;
-	  
-	  <!--var fixNav = navBarFix("kb-hide");-->
 
       document.addEventListener('DOMContentLoaded', function(){
         // Skip directly to search if the user has already entered his or her name
