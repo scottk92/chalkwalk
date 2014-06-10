@@ -81,6 +81,7 @@
       <button id="show-modal-btn" type="button" class="btn cwButton-neg" data-toggle="modal" data-target="#myModal">End Game</button>
       <button id="restart-game-btn" type="button" class="btn cwButton btn-lg">Play Another Round</button>
     </div>
+	<div id="map" style="display:hidden"/>
     <div id="paintbrush-container">
       <!--img id="paintbrush-img" src="images/paintbrush.jpg" alt="paintbrush" />
       <button id="paintbrush" type="button" class="btn btn-success btn-lg btn-block">Paint</button-->
@@ -89,7 +90,6 @@
       <h1 id="drawing-off">Drawing OFF</h1>
       <img id="knob" src="/images/turner.png" alt="knob" />
     </div>
-	<div style="display:none" id="map" />
     <ol id="debug-coordinates">Coordinates</ol>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -110,11 +110,12 @@
       document.addEventListener('DOMContentLoaded', function(){
         // Initialize
         var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
-        var numDrawersReady = 0;
-		initializeCanvasMap(fb,"map");
+        canvasMap = new google.maps.Map(document.getElementById('map'), {zoom:18, center:{lat:37.428993, lng:-122.180554}});
+		var numDrawersReady = 0;
+		recordCoordinates(fb, true);
         var timerGame =  new Counter('timer', 1000, function(){
 			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
-			alert(localStorage.userCoords);console.log(colorCoords);console.log(userCoords);
+			alert(localStorage.userCoords); console.log(colorCoords);console.log(userCoords);
 			window.location = '/results';
 			});
        
