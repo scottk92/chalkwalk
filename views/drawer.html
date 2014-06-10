@@ -114,7 +114,7 @@
 		recordCoordinates(fb, true);
         var timerGame =  new Counter('timer', 1000, function(){
 			localStorage.userCoords = JSON.stringify(toPlane(userCoords, colorCoords)); localStorage.colorCoords = JSON.stringify(colorCoords); 
-			alert(localStorage.userCoords); console.log(colorCoords);console.log(userCoords);
+			 console.log(colorCoords);console.log(userCoords);
 			window.location = '/results';
 			});
        
