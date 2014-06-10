@@ -200,8 +200,8 @@ nav {
 	opacity: 0.3;
 }
 
-.logoBG {
-	background-color: rgba(177, 221, 224, 0.2);
+.fontCol {
+	color: #3ACFC0;
 }
 
 @font-face {
