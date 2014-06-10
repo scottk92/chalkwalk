@@ -144,7 +144,7 @@
           else {
             var usernameDisplays = document.getElementsByClassName("username-display");
             Array.prototype.filter.call(usernameDisplays, function(usernameDisplay){
-              usernameDisplay.innerHTML = username;
+              usernameDisplay.innerHTML = "Welcome " + username;
             });
             localStorage.username = username;
             showPanel(SEARCH_PANEL);
