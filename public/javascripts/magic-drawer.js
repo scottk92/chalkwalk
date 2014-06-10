@@ -49,14 +49,14 @@ function setLocation(position) {
 					calibrateCoords.push(calibratedPos);
 					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
 					if (totalCoords ==7) {
-					loc({latitude:calibratedPos.lat(), longitude:calibratePos.lng()});
+					loc({latitude:calibratedPos.lat(), longitude:calibratedPos.lng()});
 					}
 				}
 			} else {
 				// Don't bother callibrating it
 				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
 			if (totalCoords ==7) {
-					loc({latitude:calibratedPos.lat(), longitude:calibratePos.lng()});
+					loc({latitude:pos.lat(), longitude:pos.lng()});
 					}}
 		}
 	}
