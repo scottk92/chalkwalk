@@ -41,13 +41,13 @@ function recordCoordinates(fb, drawer) {
         var activeLine = userCoords[user][userCoords[user].length-1];
         if (activeLine.length >= 1) { // guard against strange cases
           // Line drawn
-		  if (!drawer)
+		  if (!drawer) {
           drawLine(activeLine[activeLine.length-1], newCoords, data.color);
-          console.log("Line drawn!");
+          }console.log("Line drawn!");
         }
         // Add to the current line
         activeLine.push(newCoords);
-      }
+      alert('pushed');}
     } else if (userCoords[user] != undefined) {
       // User pressed the stop button, so create a new empty array
       userCoords[user].push([]);
