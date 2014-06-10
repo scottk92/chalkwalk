@@ -24,7 +24,7 @@ nav {
 
 /* Changes Header Bar color: Aquamarine lined with green-blue */
 .bar.cwBanner {
-	background: #0BDBC6;/*linear-gradient(#C2EFF2, #44EBDA 85%);*/
+	background: #36BAAD;/*linear-gradient(#C2EFF2, #44EBDA 85%);*/
 	border-bottom: 3px solid 00A3A3;
 }
 
@@ -133,7 +133,7 @@ nav {
 
 /* Changes Progress bar Color: Aquamarine */
 .cwProgress{
-	background-color: #0BDBC6;
+	background-color: #36BAAD;
 }
 
 .cwTextAlign{
@@ -147,14 +147,14 @@ nav {
 
 .cwButton {
 	color: white;
-	background-color: #0BDBC6;
+	background-color: #36BAAD;
 	border: 1px solid #00A3A3;
 }
 
 .cwButton:active, .cwButton.active {
 	color: white;
 	background-color: #00A3A3;
-	border: 1px solid #0BDBC6;
+	border: 1px solid #36BAAD;
 }
 
 .cwButton a.visited{
@@ -191,11 +191,11 @@ nav {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: url('../images/logo_trans.png');
+	/*background: url('../images/logo_trans.png');
 	background-image: url('../images/logo_trans.png');
 	background-size: 300px;
 	background-repeat:no-repeat;
-	background-position:center; 
+	background-position:center; */
 	background-color: rgba(177, 221, 224, 0.2);
 	opacity: 0.3;
 }
