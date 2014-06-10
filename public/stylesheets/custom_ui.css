@@ -2,6 +2,14 @@ html, body {
 	height: 100%;
 }
 
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+nav {
+	font-family: 'Open Sans', sans-serif;
+}
+
 /* Creates Header Bar */
 .bar {
   right: 0;
@@ -16,8 +24,8 @@ html, body {
 
 /* Changes Header Bar color: Aquamarine lined with green-blue */
 .bar.cwBanner {
-	background: linear-gradient(#C2EFF2, #42C6CF 85%);
-	border-bottom: 3px solid #B1DDE0;
+	background: #3ACFC0;/*linear-gradient(#C2EFF2, #44EBDA 85%);*/
+	border-bottom: 3px solid 00A3A3;
 }
 
 /* Attaches Bar to top*/
@@ -45,6 +53,7 @@ html, body {
   padding: 6px 8px 7px;
   margin-bottom: 0;
   margin-top: 3px;
+  font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 1;
@@ -60,10 +69,15 @@ html, body {
 
 .pull-left {
   float: left;
+  background-color: #FFAD17;
+	border: solid medium white;
+	color: white;
 }
 
 .bar .btn-nav.pull-left.icon-left-nav {
 	margin-right: -3px;
+	
+	
 }
 
 .title {
@@ -72,6 +86,7 @@ html, body {
   width: 100%;
   padding: 0;
   margin: 0 -10px;
+  font-family: 'Open Sans', sans-serif;
   font-size: 17px;
   font-weight: 500;
   line-height: 44px;
@@ -95,12 +110,14 @@ html, body {
   display: table-cell;
   width: 1%;
   height: 50px;
-  color: #929292;
+  color: #00A3A3;
+  /*color: #929292;*/
   text-align: center;
   vertical-align: middle;
 }
 .bar-tab .tab-item.active, .bar-tab .tab-item:active {
-  color: #428bca;
+  color: white;
+  background-color: #FFAD17;
 }
 .bar-tab .tab-item .icon {
   top: 3px;
@@ -116,7 +133,7 @@ html, body {
 
 /* Changes Progress bar Color: Aquamarine */
 .cwProgress{
-	background-color: #42C6CF;
+	background-color: #3ACFC0;
 }
 
 .cwTextAlign{
@@ -130,14 +147,22 @@ html, body {
 
 .cwButton {
 	color: white;
-	background-color: #42C6CF;
-	border: 1px solid #C8D7DE;
+	background-color: #3ACFC0;
+	border: 1px solid #00A3A3;
 }
 
 .cwButton:active, .cwButton.active {
-	color: black;
-	background-color: #B1DDE0;
-	border: 1px solid #C8D7DE;
+	color: white;
+	background-color: #00A3A3;
+	border: 1px solid #3ACFC0;
+}
+
+.cwButton a.visited{
+	color: white:
+}
+
+.cwButton a.hover{
+	color: white:
 }
 
 .cwButton-neg {
@@ -154,6 +179,8 @@ html, body {
 
 .content{
 	height: 100%;
+	font-family: 'Open Sans', sans-serif;
+	color: #6E6D6D;
 }
 
 .content:before {
@@ -164,11 +191,12 @@ html, body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: url('../images/logo_trans.png');
+	/*background: url('../images/logo_trans.png');
 	background-image: url('../images/logo_trans.png');
 	background-size: 300px;
 	background-repeat:no-repeat;
-	background-position:center; 
+	background-position:center; */
+	background-color: rgba(177, 221, 224, 0.2);
 	opacity: 0.3;
 }
 
