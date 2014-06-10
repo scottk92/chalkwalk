@@ -12,5 +12,6 @@ if (Modernizr.touch) {
     .on('blur', 'input', function(e) {
         $body.removeClass(classN);
     });
+	alert("yo!");
 } 
 }
