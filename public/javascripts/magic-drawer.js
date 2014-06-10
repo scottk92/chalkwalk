@@ -18,6 +18,12 @@ var coordsDB = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' +
 var drawingOffTimer;
 
 
+var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
+      var count = 0;
+	
+	function loc(position) {
+	fb.child('startLocation').push({lat:position.latitude, lng:position.longitude});
+	};
 var totalCoords = 0;
 // Initialize vibration
 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
@@ -42,11 +48,16 @@ function setLocation(position) {
 					var calibratedPos = calibratedLoc();
 					calibrateCoords.push(calibratedPos);
 					coordsDB.push({name:localStorage.username, stopped:false, lat:calibratedPos.lat(), lng:calibratedPos.lng(), color:localStorage.color});
+					if (totalCoords ==7) {
+					loc({latitude:calibratedPos.lat(), longitude:calibratePos.lng()});
+					}
 				}
 			} else {
 				// Don't bother callibrating it
 				coordsDB.push({name:localStorage.username, stopped:false, lat:pos.lat(), lng:pos.lng(), color:localStorage.color});
-			}
+			if (totalCoords ==7) {
+					loc({latitude:calibratedPos.lat(), longitude:calibratePos.lng()});
+					}}
 		}
 	}
 }

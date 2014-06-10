@@ -53,7 +53,7 @@
       // Initialize
       var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
       var drawing = document.getElementById("drawnImage");   
-	  fb.child('drawnImage').on('value', function(dataSnapshot) {
+	  fb.child('drawnImage').once('child_added', function(dataSnapshot) {
         console.log(document.body.childNodes);console.log(dataSnapshot.val());drawing.src = dataSnapshot.val();
 		var drawingImage = new Transform('outer', 'inner');
 		drawingImage.startListening();

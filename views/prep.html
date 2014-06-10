@@ -49,16 +49,7 @@
     <script src="javascripts/counter.js"></script>
     <script src="javascripts/random-image.js"></script>
     <script>
-	var watch;  
-	
-	var fb = new Firebase('https://outdoorspictionary.firebaseIO.com/Games/' + localStorage.game + '/' + localStorage.round);
-      var count = 0;
-	
-	function loc() {watch = navigator.geolocation.watchPosition(function (position) {
-	 
-	fb.child('startLocation').set({lat:position.coords.latitude, lng:position.coords.longitude});
-	});};loc();window.onbeforeunload = function () {navigator.geolocation.clearWatch(watch);}
-      document.addEventListener('DOMContentLoaded', function(){
+	document.addEventListener('DOMContentLoaded', function(){
         var originalImage = document.getElementById("original-image");
         var imageName = document.getElementById("image-name");
         

@@ -90,8 +90,10 @@
 			/*var image = createResultsPage(userCoords, colorCoords);
 			fb.child('drawnImage').set(image.toDataURL());window.setTimeout(function() {
 			window.location = '/results';}, 4000);*/
-			window.location = '/results';
-        });
+			fb.child('drawnImage').on('child_added', function(snapshot) {
+				window.location = '/results';
+			});
+		});
         initializeEndGame(timer);
 
         // Record a user's color on the guesser's page
