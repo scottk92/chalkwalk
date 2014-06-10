@@ -3,17 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ChalkWalk - Waiting Room</title>
-	
-	<!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
 
     <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- Include the compiled Ratchet CSS and custom CSS-->
+    <!-- Include custom CSS-->
 	<link href="stylesheets/custom_ui.css" rel="stylesheet">	
 
     <!-- Bootstrap -->
@@ -53,6 +50,10 @@
     </style>
   </head>
   <body>
+		<header class="bar cwBanner">
+			<h1 class="title cwTitle">Start a Game</h1>
+		</header>
+  
 		<h2 id="game-name-header"></h2>
 		<button id="leave-game-btn" type="button" class="btn cwButton-neg">Leave Game</button>
 		<p>Which position do you want to play?</p>
