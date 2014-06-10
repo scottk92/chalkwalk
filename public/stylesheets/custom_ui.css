@@ -24,7 +24,7 @@ nav {
 
 /* Changes Header Bar color: Aquamarine lined with green-blue */
 .bar.cwBanner {
-	background: #36BAAD;/*linear-gradient(#C2EFF2, #44EBDA 85%);*/
+	background: #3ACFC0;/*linear-gradient(#C2EFF2, #44EBDA 85%);*/
 	border-bottom: 3px solid 00A3A3;
 }
 
@@ -133,7 +133,7 @@ nav {
 
 /* Changes Progress bar Color: Aquamarine */
 .cwProgress{
-	background-color: #36BAAD;
+	background-color: #3ACFC0;
 }
 
 .cwTextAlign{
@@ -147,14 +147,14 @@ nav {
 
 .cwButton {
 	color: white;
-	background-color: #36BAAD;
+	background-color: #3ACFC0;
 	border: 1px solid #00A3A3;
 }
 
 .cwButton:active, .cwButton.active {
 	color: white;
 	background-color: #00A3A3;
-	border: 1px solid #36BAAD;
+	border: 1px solid #3ACFC0;
 }
 
 .cwButton a.visited{
