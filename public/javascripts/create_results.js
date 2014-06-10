@@ -1,4 +1,4 @@
-var toPlane = function(coordHash, colorHash) {
+function toPlane(coordHash, colorHash) {
 	//create canvas
 	
 	var nameList = Object.keys(coordHash);console.log(nameList);
@@ -24,7 +24,7 @@ var toPlane = function(coordHash, colorHash) {
 		}
 	}return newCoordHash;
 	}
-	function createResultsPage(newCoordHash, colorHash) 
+	function createResultsPage(newCoordHash, colorHash){ 
 	var nameList = Object.keys(newCoordHash);
 	
 	var image = createDrawing();
